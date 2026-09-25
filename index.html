@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Russien @18 — Share Your Moments</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500&family=Great+Vibes&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        :root {
+            --pink-light: #fbe8ef;
+            --pink: #e9a9bd;
+            --pink-dark: #a85d78;
+
+            --purple-light: #eee5f3;
+            --purple-dark: #76566f;
+
+            --pearl: #fffdfb;
+            --text: #553f4c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--pink-light),
+                    var(--purple-light),
+                    var(--pearl)
+                );
+
+            font-family: "DM Sans", sans-serif;
+            color: var(--text);
+
+            text-align: center;
+        }
+
+        .qr-page {
+            width: min(460px, 100%);
+
+            padding: 42px 28px;
+
+            border-radius: 28px;
+
+            background: rgba(255, 253, 251, 0.9);
+
+            box-shadow:
+                0 18px 50px rgba(118, 86, 111, 0.16);
+        }
+
+        .script-title {
+            margin: 0 0 2px;
+
+            font-family: "Great Vibes", cursive;
+
+            font-size: 36px;
+
+            color: var(--pink-dark);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 42px;
+
+            font-weight: 500;
+
+            color: var(--purple-dark);
+        }
+
+        .subtitle {
+            margin: 0 0 28px;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+        #qrcode {
+            display: flex;
+
+            justify-content: center;
+
+            margin: 0 auto 22px;
+        }
+
+        #qrcode img {
+            padding: 12px;
+
+            background: white;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 10px 30px rgba(118, 86, 111, 0.12);
+        }
+
+        .scan-text {
+            margin: 0;
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 22px;
+
+            letter-spacing: 1px;
+
+            color: var(--pink-dark);
+        }
+
+        .small-note {
+            margin: 12px 0 0;
+
+            font-size: 12px;
+
+            opacity: 0.65;
+        }
+
+        @media (max-width: 480px) {
+
+            .qr-page {
+                padding: 34px 20px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .script-title {
+                font-size: 32px;
+            }
+
+            #qrcode img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .scan-text {
+                font-size: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <main class="qr-page">
+
+        <p class="script-title">
+            Russien @18
+        </p>
+
+        <h1>
+            Share Your Moments
+        </h1>
+
+        <p class="subtitle">
+            Capture the celebration and share your favorite memories.
+        </p>
+
+        <div id="qrcode"></div>
+
+        <p class="scan-text">
+            SCAN TO UPLOAD YOUR PHOTOS
+        </p>
+
+        <p class="small-note">
+            No account needed • Up to 20 photos
+        </p>
+
+    </main>
+
+
+    <!-- QR CODE LIBRARY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+
+    <script>
+
+        const uploadPage =
+            "https://ktnrg17.github.io/RUSSIEN-PHOTOS/p/upload.html";
+
+
+        new QRCode(
+            document.getElementById("qrcode"),
+            {
+                text: uploadPage,
+
+                width: 220,
+                height: 220,
+
+                colorDark: "#553f4c",
+                colorLight: "#ffffff",
+
+                correctLevel: QRCode.CorrectLevel.H
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
