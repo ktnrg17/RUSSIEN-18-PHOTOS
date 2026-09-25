@@ -4,9 +4,15 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="theme-color" content="#fbe8ef">
+    <meta
+        name="theme-color"
+        content="#fbe8ef"
+    >
 
     <title>Russien @18 | Photo Upload</title>
 
@@ -15,11 +21,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Great+Vibes&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500&family=Great+Vibes&display=swap"
         rel="stylesheet"
     >
 
-    <!-- IMPORTANT: CSS IS IN ROOT -->
     <link rel="stylesheet" href="upload.css">
 </head>
 
@@ -29,22 +34,47 @@
 
         <section class="upload-card">
 
-            <p class="small-title">
-                RUSSIEN @18
+            <p class="script-title">
+                Russien @18
             </p>
 
             <h1>
                 Share Your Moments
             </h1>
 
-            <p class="script-title">
-                With Love
+            <p class="description">
+                Capture the celebration and share your favorite memories.
             </p>
 
-            <p class="description">
-                Help us keep the beautiful memories of this celebration.
-                Upload your favorite photos from the event.
-            </p>
+
+            <!-- =========================
+                 NICKNAME
+            ========================== -->
+
+            <div class="nickname-section">
+
+                <label for="nickname">
+                    Your Nickname
+                </label>
+
+                <input
+                    type="text"
+                    id="nickname"
+                    placeholder="Enter your nickname"
+                    maxlength="30"
+                    autocomplete="off"
+                >
+
+                <p class="nickname-note">
+                    Please enter your nickname before uploading.
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 UPLOAD BOX
+            ========================== -->
 
             <div class="upload-box">
 
@@ -57,7 +87,7 @@
                 </h2>
 
                 <p>
-                    You may select up to 20 photos.
+                    Select up to 20 photos from the celebration.
                 </p>
 
                 <input
@@ -84,10 +114,20 @@
 
             </div>
 
+
+            <!-- =========================
+                 PREVIEWS
+            ========================== -->
+
             <div
                 id="previewContainer"
                 class="preview-container"
             ></div>
+
+
+            <!-- =========================
+                 UPLOAD BUTTON
+            ========================== -->
 
             <button
                 id="uploadButton"
@@ -98,27 +138,42 @@
                 Upload Photos
             </button>
 
+
+            <!-- =========================
+                 PROGRESS
+            ========================== -->
+
             <div
                 id="progressContainer"
                 class="progress-container"
                 hidden
             >
+
                 <div class="progress-bar">
+
                     <div
                         id="progressBar"
                         class="progress-fill"
                     ></div>
+
                 </div>
 
                 <p id="progressText">
                     Preparing your photos...
                 </p>
+
             </div>
+
+
+            <!-- =========================
+                 MESSAGE
+            ========================== -->
 
             <div
                 id="message"
                 class="message"
             ></div>
+
 
             <p class="footer-note">
                 Thank you for being part of Russien's special day.
@@ -128,7 +183,6 @@
 
     </main>
 
-    <!-- IMPORTANT: JS IS IN ROOT -->
     <script src="upload.js"></script>
 
 </body>
