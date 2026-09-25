@@ -48,15 +48,16 @@ body {
         );
 
     font-family: "DM Sans", sans-serif;
+
     color: var(--text);
 
     text-align: center;
 }
 
 
-/* =========================
+/* =========================================
    QR PAGE
-========================= */
+========================================= */
 
 .qr-page {
     width: min(460px, 100%);
@@ -74,8 +75,6 @@ body {
 }
 
 
-/* SCRIPT TITLE */
-
 .script-title {
     margin: 0 0 2px;
 
@@ -87,9 +86,8 @@ body {
 }
 
 
-/* MAIN TITLE */
-
-.qr-page h1 {
+.qr-page h1,
+.upload-card h1 {
     margin: 0 0 8px;
 
     font-family: "Cormorant Garamond", serif;
@@ -102,8 +100,6 @@ body {
 }
 
 
-/* SUBTITLE */
-
 .subtitle {
     margin: 0 0 28px;
 
@@ -114,8 +110,6 @@ body {
     color: var(--text);
 }
 
-
-/* QR CODE */
 
 #qrcode {
     display: flex;
@@ -144,8 +138,6 @@ body {
 }
 
 
-/* SCAN TEXT */
-
 .scan-text {
     margin: 0;
 
@@ -159,8 +151,6 @@ body {
 }
 
 
-/* SMALL NOTE */
-
 .small-note {
     margin: 12px 0 0;
 
@@ -172,11 +162,427 @@ body {
 }
 
 
-/* =========================
+/* =========================================
+   UPLOAD PAGE
+========================================= */
+
+.upload-page {
+    width: min(600px, 100%);
+}
+
+
+.upload-card {
+    width: 100%;
+
+    padding: 42px 30px;
+
+    border-radius: 28px;
+
+    background: rgba(255, 253, 251, 0.90);
+
+    border: 1px solid rgba(255, 255, 255, 0.75);
+
+    box-shadow:
+        0 18px 50px rgba(118, 86, 111, 0.16);
+}
+
+
+.upload-card .script-title {
+    margin-bottom: 4px;
+}
+
+
+.upload-card h1 {
+    margin-bottom: 10px;
+}
+
+
+.description {
+    margin: 0 auto 28px;
+
+    max-width: 430px;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   NICKNAME
+========================================= */
+
+.nickname-section {
+    text-align: left;
+
+    margin-bottom: 22px;
+}
+
+
+.nickname-section label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 21px;
+
+    color: var(--purple-dark);
+}
+
+
+#nickname {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border: 1px solid rgba(168, 93, 120, 0.30);
+
+    border-radius: 14px;
+
+    background: var(--cream);
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 14px;
+
+    color: var(--text);
+
+    outline: none;
+
+    transition: 0.25s ease;
+}
+
+
+#nickname:focus {
+    border-color: var(--pink);
+
+    box-shadow:
+        0 0 0 3px rgba(233, 169, 189, 0.18);
+}
+
+
+#nickname::placeholder {
+    color: var(--text);
+
+    opacity: 0.45;
+}
+
+
+.nickname-note {
+    margin: 7px 0 0;
+
+    font-size: 11px;
+
+    opacity: 0.60;
+}
+
+
+/* =========================================
+   UPLOAD BOX
+========================================= */
+
+.upload-box {
+    padding: 28px 20px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(251, 232, 239, 0.75),
+            rgba(238, 229, 243, 0.75)
+        );
+
+    border: 1px dashed rgba(168, 93, 120, 0.35);
+}
+
+
+.upload-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 54px;
+    height: 54px;
+
+    margin: 0 auto 12px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 253, 251, 0.80);
+
+    color: var(--pink-dark);
+
+    font-size: 28px;
+}
+
+
+.upload-box h2 {
+    margin: 0 0 7px;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 27px;
+
+    font-weight: 500;
+
+    color: var(--purple-dark);
+}
+
+
+.upload-box > p {
+    margin: 0 0 18px;
+
+    font-size: 13px;
+
+    opacity: 0.72;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.upload-button,
+.submit-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 46px;
+
+    padding: 12px 24px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.upload-button {
+    background: var(--pink);
+
+    color: white;
+
+    box-shadow:
+        0 8px 20px rgba(168, 93, 120, 0.18);
+}
+
+
+.upload-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 24px rgba(168, 93, 120, 0.25);
+}
+
+
+.file-count {
+    margin: 14px 0 0 !important;
+
+    font-size: 12px !important;
+
+    color: var(--purple-dark);
+
+    opacity: 0.8 !important;
+}
+
+
+/* =========================================
+   PREVIEW
+========================================= */
+
+.preview-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(85px, 1fr));
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+.preview-item {
+    position: relative;
+
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+
+    border-radius: 13px;
+
+    background: var(--pink-light);
+
+    box-shadow:
+        0 5px 15px rgba(118, 86, 111, 0.10);
+}
+
+
+.preview-item img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================================
+   SUBMIT
+========================================= */
+
+.submit-button {
+    width: 100%;
+
+    margin-top: 22px;
+
+    background: var(--purple-dark);
+
+    color: white;
+
+    box-shadow:
+        0 8px 20px rgba(118, 86, 111, 0.18);
+}
+
+
+.submit-button:not(:disabled):hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 24px rgba(118, 86, 111, 0.25);
+}
+
+
+.submit-button:disabled {
+    opacity: 0.40;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   PROGRESS
+========================================= */
+
+.progress-container {
+    margin-top: 22px;
+}
+
+
+.progress-bar {
+    width: 100%;
+
+    height: 8px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: var(--purple-light);
+}
+
+
+.progress-fill {
+    width: 0%;
+
+    height: 100%;
+
+    border-radius: 999px;
+
+    background: var(--pink);
+}
+
+
+.progress-container p {
+    margin: 10px 0 0;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.message {
+    min-height: 22px;
+
+    margin-top: 18px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.message.success {
+    color: var(--purple-dark);
+}
+
+
+.message.error {
+    color: var(--pink-dark);
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer-note {
+    margin: 26px 0 0;
+
+    font-size: 12px;
+
+    opacity: 0.60;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 18px;
+    }
+
+    .upload-card {
+        padding: 36px 24px;
+    }
+}
+
+
+/* =========================================
    MOBILE
-========================= */
+========================================= */
 
 @media (max-width: 480px) {
+
+    body {
+        padding: 14px;
+    }
 
     .qr-page {
         padding: 34px 20px;
@@ -186,7 +592,8 @@ body {
         font-size: 32px;
     }
 
-    .qr-page h1 {
+    .qr-page h1,
+    .upload-card h1 {
         font-size: 36px;
     }
 
@@ -197,5 +604,20 @@ body {
 
     .scan-text {
         font-size: 20px;
+    }
+
+    .upload-card {
+        padding: 32px 18px;
+    }
+
+    .upload-box {
+        padding: 24px 14px;
+    }
+
+    .preview-container {
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 8px;
     }
 }
