@@ -4,59 +4,133 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Russien @18 — Share Your Moments</title>
+    <meta name="theme-color" content="#fbe8ef">
+
+    <title>Russien @18 | Photo Upload</title>
 
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500&family=Great+Vibes&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Great+Vibes&display=swap"
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="style.css">
+    <!-- IMPORTANT: CSS IS IN ROOT -->
+    <link rel="stylesheet" href="upload.css">
 </head>
 
 <body>
 
-    <main class="qr-page">
+    <main class="upload-page">
 
-        <p class="script-title">
-            Russien @18
-        </p>
+        <section class="upload-card">
 
-        <h1>
-            Share Your Moments
-        </h1>
+            <p class="small-title">
+                RUSSIEN @18
+            </p>
 
-        <p class="subtitle">
-            Capture the celebration and share your favorite memories.
-        </p>
+            <h1>
+                Share Your Moments
+            </h1>
 
-        <!-- QR CODE -->
-        <div id="qrcode"></div>
+            <p class="script-title">
+                With Love
+            </p>
 
-        <p class="scan-text">
-            SCAN TO UPLOAD YOUR PHOTOS
-        </p>
+            <p class="description">
+                Help us keep the beautiful memories of this celebration.
+                Upload your favorite photos from the event.
+            </p>
 
-        <p class="small-note">
-            No account needed • Up to 20 photos
-        </p>
+            <div class="upload-box">
+
+                <div class="upload-icon">
+                    ♡
+                </div>
+
+                <h2>
+                    Upload Your Photos
+                </h2>
+
+                <p>
+                    You may select up to 20 photos.
+                </p>
+
+                <input
+                    type="file"
+                    id="photoInput"
+                    accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+                    multiple
+                    hidden
+                >
+
+                <label
+                    for="photoInput"
+                    class="upload-button"
+                >
+                    Choose Photos
+                </label>
+
+                <p
+                    id="fileCount"
+                    class="file-count"
+                >
+                    No photos selected
+                </p>
+
+            </div>
+
+            <div
+                id="previewContainer"
+                class="preview-container"
+            ></div>
+
+            <button
+                id="uploadButton"
+                class="submit-button"
+                type="button"
+                disabled
+            >
+                Upload Photos
+            </button>
+
+            <div
+                id="progressContainer"
+                class="progress-container"
+                hidden
+            >
+                <div class="progress-bar">
+                    <div
+                        id="progressBar"
+                        class="progress-fill"
+                    ></div>
+                </div>
+
+                <p id="progressText">
+                    Preparing your photos...
+                </p>
+            </div>
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+            <p class="footer-note">
+                Thank you for being part of Russien's special day.
+            </p>
+
+        </section>
 
     </main>
 
-
-    <!-- QR CODE LIBRARY -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-    <script src="script.js"></script>
+    <!-- IMPORTANT: JS IS IN ROOT -->
+    <script src="upload.js"></script>
 
 </body>
+
 </html>
