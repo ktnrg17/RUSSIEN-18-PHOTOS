@@ -342,33 +342,18 @@
         }
 
 
+        /* UPLoader name */
+
         .photo-info {
 
             position:
                 absolute;
 
             left:
-                10px;
+                12px;
 
             bottom:
-                10px;
-
-            padding:
-                4px 9px;
-
-            background:
-                rgba(
-                    255,
-                    253,
-                    251,
-                    0.82
-                );
-
-            border-radius:
-                8px;
-
-            backdrop-filter:
-                blur(5px);
+                12px;
 
         }
 
@@ -389,65 +374,16 @@
                 500;
 
             color:
-                var(--text);
+                #b85f7b;
 
-        }
-
-
-        .delete-button {
-
-            position:
-                absolute;
-
-            top:
-                10px;
-
-            right:
-                10px;
-
-            border:
-                none;
-
-            border-radius:
-                8px;
-
-            padding:
-                7px 10px;
-
-            background:
+            text-shadow:
+                0 1px 4px
                 rgba(
-                    255,
-                    253,
-                    251,
-                    0.88
+                    0,
+                    0,
+                    0,
+                    0.18
                 );
-
-            color:
-                var(--pink-dark);
-
-            font-family:
-                "DM Sans",
-                sans-serif;
-
-            font-size:
-                11px;
-
-            font-weight:
-                600;
-
-            cursor:
-                pointer;
-
-            backdrop-filter:
-                blur(5px);
-
-        }
-
-
-        .delete-button:hover {
-
-            background:
-                white;
 
         }
 
@@ -567,9 +503,6 @@
 
                 bottom:
                     7px;
-
-                padding:
-                    4px 7px;
 
             }
 
@@ -753,228 +686,6 @@
 
         /*
         =========================================
-        LOAD CURRENT USER
-        =========================================
-        */
-
-        async function getCurrentUser() {
-
-            const response =
-                await fetch(
-                    `${SUPABASE_URL}/auth/v1/user`,
-                    {
-                        method: "GET",
-
-                        headers: {
-                            "apikey":
-                                SUPABASE_KEY,
-
-                            "Authorization":
-                                `Bearer ${accessToken}`
-                        }
-                    }
-                );
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    "Your login session has expired."
-                );
-
-            }
-
-
-            return await response.json();
-
-        }
-
-
-        /*
-        =========================================
-        DELETE PHOTO
-        =========================================
-        */
-
-        async function deletePhoto(
-            photo,
-            item,
-            user
-        ) {
-
-            if (
-                photo.user_id !==
-                user.id
-            ) {
-
-                alert(
-                    "You can only delete your own photos."
-                );
-
-                return;
-
-            }
-
-
-            const confirmed =
-                confirm(
-                    "Delete this photo?"
-                );
-
-
-            if (!confirmed) {
-
-                return;
-
-            }
-
-
-            try {
-
-                /*
-                Get storage path from URL
-                */
-
-                const marker =
-                    `/object/public/${BUCKET_NAME}/`;
-
-
-                const markerIndex =
-                    photo.photo_url.indexOf(
-                        marker
-                    );
-
-
-                if (
-                    markerIndex === -1
-                ) {
-
-                    throw new Error(
-                        "Unable to find the photo file."
-                    );
-
-                }
-
-
-                const filePath =
-                    decodeURIComponent(
-                        photo.photo_url.substring(
-                            markerIndex +
-                            marker.length
-                        )
-                    );
-
-
-                /*
-                Delete file from Storage
-                */
-
-                const storageResponse =
-                    await fetch(
-                        `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}`,
-                        {
-                            method: "DELETE",
-
-                            headers: {
-                                "apikey":
-                                    SUPABASE_KEY,
-
-                                "Authorization":
-                                    `Bearer ${accessToken}`,
-
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body: JSON.stringify({
-                                prefixes: [
-                                    filePath
-                                ]
-                            })
-                        }
-                    );
-
-
-                if (!storageResponse.ok) {
-
-                    const errorText =
-                        await storageResponse.text();
-
-                    throw new Error(
-                        errorText
-                    );
-
-                }
-
-
-                /*
-                Delete database record
-                */
-
-                const databaseResponse =
-                    await fetch(
-                        `${SUPABASE_URL}/rest/v1/photos?id=eq.${photo.id}`,
-                        {
-                            method: "DELETE",
-
-                            headers: {
-                                "apikey":
-                                    SUPABASE_KEY,
-
-                                "Authorization":
-                                    `Bearer ${accessToken}`
-                            }
-                        }
-                    );
-
-
-                if (!databaseResponse.ok) {
-
-                    const errorText =
-                        await databaseResponse.text();
-
-                    throw new Error(
-                        errorText
-                    );
-
-                }
-
-
-                item.remove();
-
-
-                if (
-                    gallery.children.length === 0
-                ) {
-
-                    gallery.innerHTML = `
-                        <div class="empty-message">
-                            No memories have been shared yet.
-                        </div>
-                    `;
-
-                }
-
-            } catch (error) {
-
-                console.error(
-                    "DELETE ERROR:",
-                    error
-                );
-
-
-                alert(
-                    "Unable to delete photo: " +
-                    error.message
-                );
-
-            }
-
-        }
-
-
-        /*
-        =========================================
         LOAD GALLERY
         =========================================
         */
@@ -982,10 +693,6 @@
         async function loadGallery() {
 
             try {
-
-                const user =
-                    await getCurrentUser();
-
 
                 const response =
                     await fetch(
@@ -1039,6 +746,10 @@
                 }
 
 
+                /*
+                SHOW ALL PHOTOS
+                */
+
                 photos.forEach(
                     photo => {
 
@@ -1074,49 +785,9 @@
 
 
                         /*
-                        Delete button only appears
-                        for the current user's photos.
+                        UPLOADER NAME
+                        BOTTOM LEFT
                         */
-
-                        if (
-                            photo.user_id ===
-                            user.id
-                        ) {
-
-                            const deleteButton =
-                                document.createElement(
-                                    "button"
-                                );
-
-
-                            deleteButton.className =
-                                "delete-button";
-
-
-                            deleteButton.textContent =
-                                "Delete";
-
-
-                            deleteButton.addEventListener(
-                                "click",
-                                () => {
-
-                                    deletePhoto(
-                                        photo,
-                                        item,
-                                        user
-                                    );
-
-                                }
-                            );
-
-
-                            item.appendChild(
-                                deleteButton
-                            );
-
-                        }
-
 
                         const photoInfo =
                             document.createElement(
@@ -1186,6 +857,7 @@
         loadGallery();
 
     </script>
+
 
 </body>
 
