@@ -12,11 +12,12 @@
 
     <meta
         name="theme-color"
-        content="#fbe8ef"
+        content="#f8dce8"
     >
 
-    <title>Russien @18 | Guest Access</title>
+    <title>RUSSIEN @18 — Guest Access</title>
 
+    <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link
@@ -26,7 +27,7 @@
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500&family=Great+Vibes&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Great+Vibes&display=swap"
         rel="stylesheet"
     >
 
@@ -48,289 +49,472 @@
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
+
             min-height: 100vh;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            padding: 20px;
+            padding: 25px;
 
-            font-family: "DM Sans", sans-serif;
+            background:
+                radial-gradient(
+                    circle at top left,
+                    var(--purple-light),
+                    transparent 40%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    var(--pink-light),
+                    transparent 45%
+                ),
+                var(--cream);
 
             color: var(--text);
 
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--pink-light),
-                    var(--purple-light),
-                    var(--cream)
-                );
+            font-family: "DM Sans", sans-serif;
         }
 
-        .upload-page {
+        .container {
+
             width: 100%;
-            max-width: 650px;
-        }
+            max-width: 440px;
 
-        .upload-card {
-            background: rgba(255, 253, 251, 0.94);
+            background: rgba(255, 253, 251, 0.88);
 
-            border-radius: 32px;
+            border: 1px solid rgba(181, 154, 197, 0.25);
 
-            padding: 55px 35px;
+            border-radius: 28px;
 
-            box-shadow:
-                0 20px 60px rgba(118, 86, 111, 0.15);
+            padding: 45px 32px;
 
             text-align: center;
+
+            box-shadow:
+                0 20px 50px rgba(118, 86, 111, 0.14);
+
+            backdrop-filter: blur(12px);
         }
 
-        .script-title {
-            margin: 0;
+        .small-title {
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 12px;
+
+            letter-spacing: 4px;
+
+            color: var(--purple-dark);
+
+            margin-bottom: 10px;
+        }
+
+        .title {
 
             font-family: "Great Vibes", cursive;
 
-            font-size: 52px;
+            font-size: 48px;
 
             color: var(--pink-dark);
+
+            line-height: 1;
+
+            margin-bottom: 10px;
         }
 
-        h1 {
-            margin: 12px 0 10px;
+        .subtitle {
 
             font-family: "Cormorant Garamond", serif;
 
-            font-size: clamp(42px, 7vw, 65px);
+            font-size: 22px;
 
-            font-weight: 500;
+            color: var(--text);
+
+            margin-bottom: 28px;
+        }
+
+        .tabs {
+
+            display: flex;
+
+            gap: 8px;
+
+            padding: 5px;
+
+            background: var(--purple-light);
+
+            border-radius: 14px;
+
+            margin-bottom: 25px;
+        }
+
+        .tab {
+
+            flex: 1;
+
+            border: none;
+
+            background: transparent;
+
+            padding: 11px 8px;
+
+            border-radius: 10px;
 
             color: var(--purple-dark);
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
         }
 
-        .description {
-            max-width: 500px;
+        .tab.active {
 
-            margin: 0 auto 35px;
+            background: var(--pearl);
 
-            font-size: 16px;
+            color: var(--pink-dark);
 
-            line-height: 1.7;
+            box-shadow:
+                0 3px 10px rgba(118, 86, 111, 0.10);
         }
 
-        .input-group {
-            margin-bottom: 18px;
+        .form {
+
+            display: none;
 
             text-align: left;
         }
 
-        .input-group label {
+        .form.active {
+            display: block;
+        }
+
+        label {
+
             display: block;
 
             margin-bottom: 8px;
 
-            font-size: 14px;
+            font-size: 13px;
 
-            color: var(--purple-dark);
+            font-weight: 500;
+
+            color: var(--text);
         }
 
-        .input-group input {
+        input {
+
             width: 100%;
 
-            padding: 15px 18px;
+            padding: 14px 15px;
 
-            border: 1px solid var(--pink);
+            margin-bottom: 17px;
 
-            border-radius: 14px;
+            border: 1px solid rgba(168, 93, 120, 0.25);
+
+            border-radius: 13px;
 
             outline: none;
 
-            background: var(--cream);
+            background: rgba(255, 253, 251, 0.9);
 
             color: var(--text);
 
             font-family: "DM Sans", sans-serif;
 
-            font-size: 16px;
+            font-size: 14px;
 
-            transition: 0.3s ease;
+            transition: 0.25s ease;
         }
 
-        .input-group input:focus {
-            border-color: var(--purple);
+        input:focus {
+
+            border-color: var(--pink);
 
             box-shadow:
-                0 0 0 4px rgba(181, 154, 197, 0.15);
+                0 0 0 3px rgba(233, 169, 189, 0.16);
         }
 
-        .continue-button {
+        input::placeholder {
+            color: #a8959e;
+        }
+
+        .main-button {
+
             width: 100%;
-
-            margin-top: 10px;
-
-            padding: 15px 20px;
 
             border: none;
 
             border-radius: 14px;
 
-            background: var(--pink-dark);
+            padding: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--pink),
+                    var(--purple)
+                );
 
             color: white;
 
             font-family: "DM Sans", sans-serif;
 
-            font-size: 16px;
+            font-size: 14px;
+
+            font-weight: 600;
+
+            letter-spacing: 0.5px;
 
             cursor: pointer;
 
-            transition: 0.3s ease;
+            transition: 0.25s ease;
+
+            box-shadow:
+                0 8px 20px rgba(168, 93, 120, 0.18);
         }
 
-        .continue-button:hover {
-            transform: translateY(-2px);
+        .main-button:hover {
 
-            opacity: 0.92;
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 11px 24px rgba(168, 93, 120, 0.22);
         }
 
-        .continue-button:disabled {
+        .main-button:disabled {
+
             opacity: 0.6;
 
             cursor: not-allowed;
+
+            transform: none;
         }
 
         .message {
-            min-height: 24px;
 
-            margin-top: 18px;
+            min-height: 22px;
 
-            font-size: 14px;
+            margin-top: 15px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            line-height: 1.5;
         }
 
         .message.error {
-            color: var(--pink-dark);
+            color: #a34f68;
         }
 
         .message.success {
-            color: var(--purple-dark);
+            color: #687c68;
         }
 
-        .footer-note {
-            margin-top: 30px;
+        .hint {
 
-            font-family: "Cormorant Garamond", serif;
+            margin-top: 22px;
 
-            font-size: 18px;
+            text-align: center;
 
-            color: var(--purple-dark);
+            font-size: 12px;
+
+            color: #8c7982;
+
+            line-height: 1.5;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 480px) {
 
             body {
-                padding: 15px;
+                padding: 16px;
             }
 
-            .upload-card {
-                padding: 40px 22px;
-
-                border-radius: 26px;
+            .container {
+                padding: 35px 22px;
+                border-radius: 24px;
             }
 
-            .script-title {
+            .title {
                 font-size: 43px;
             }
 
-            h1 {
-                font-size: 48px;
+            .subtitle {
+                font-size: 20px;
             }
-
         }
 
     </style>
 
 </head>
 
-
 <body>
 
-    <main class="upload-page">
+    <main class="container">
 
-        <section class="upload-card">
+        <p class="small-title">
+            WELCOME TO
+        </p>
 
-            <p class="script-title">
-                Russien @18
-            </p>
+        <h1 class="title">
+            Russien @18
+        </h1>
 
-            <h1>
-                Your Memories
-            </h1>
-
-            <p class="description">
-                Enter your nickname and create a password
-                to share and manage your photos.
-            </p>
+        <p class="subtitle">
+            Share your memories
+        </p>
 
 
-            <div class="input-group">
+        <!-- TABS -->
 
-                <label for="nicknameInput">
-                    Nickname
-                </label>
+        <div class="tabs">
 
-                <input
-                    type="text"
-                    id="nicknameInput"
-                    placeholder="Enter your nickname"
-                    maxlength="30"
-                    autocomplete="username"
-                >
+            <button
+                type="button"
+                class="tab active"
+                id="signUpTab"
+            >
+                Sign Up
+            </button>
 
-            </div>
+            <button
+                type="button"
+                class="tab"
+                id="loginTab"
+            >
+                Log In
+            </button>
+
+        </div>
 
 
-            <div class="input-group">
+        <!-- SIGN UP -->
 
-                <label for="passwordInput">
-                    Password
-                </label>
+        <form
+            class="form active"
+            id="signUpForm"
+        >
 
-                <input
-                    type="password"
-                    id="passwordInput"
-                    placeholder="Create a password"
-                    minlength="6"
-                    autocomplete="current-password"
-                >
+            <label for="signUpNickname">
+                Nickname
+            </label>
 
-            </div>
+            <input
+                type="text"
+                id="signUpNickname"
+                placeholder="Enter your nickname"
+                maxlength="30"
+                autocomplete="username"
+                required
+            >
+
+
+            <label for="signUpPassword">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="signUpPassword"
+                placeholder="Create a password"
+                minlength="6"
+                autocomplete="new-password"
+                required
+            >
+
+
+            <label for="confirmPassword">
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Enter your password again"
+                minlength="6"
+                autocomplete="new-password"
+                required
+            >
 
 
             <button
-                id="continueButton"
-                class="continue-button"
-                type="button"
+                type="submit"
+                class="main-button"
+                id="signUpButton"
             >
-                Continue
+                CREATE ACCOUNT
             </button>
 
-
-            <div
-                id="message"
-                class="message"
-            ></div>
+        </form>
 
 
-            <p class="footer-note">
-                Your password lets you manage your own photos.
-            </p>
+        <!-- LOG IN -->
 
-        </section>
+        <form
+            class="form"
+            id="loginForm"
+        >
+
+            <label for="loginNickname">
+                Nickname
+            </label>
+
+            <input
+                type="text"
+                id="loginNickname"
+                placeholder="Enter your nickname"
+                maxlength="30"
+                autocomplete="username"
+                required
+            >
+
+
+            <label for="loginPassword">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="main-button"
+                id="loginButton"
+            >
+                LOG IN
+            </button>
+
+        </form>
+
+
+        <div
+            class="message"
+            id="message"
+        ></div>
+
+
+        <p class="hint">
+            Use the same nickname and password whenever
+            you want to access your photos again.
+        </p>
 
     </main>
 
@@ -344,89 +528,170 @@
             "sb_publishable_nIm23K5lShcFGJ6m18DzaA_EAXQXGc0";
 
 
-        const nicknameInput =
-            document.getElementById("nicknameInput");
+        const signUpTab =
+            document.getElementById("signUpTab");
 
-        const passwordInput =
-            document.getElementById("passwordInput");
+        const loginTab =
+            document.getElementById("loginTab");
 
-        const continueButton =
-            document.getElementById("continueButton");
+        const signUpForm =
+            document.getElementById("signUpForm");
+
+        const loginForm =
+            document.getElementById("loginForm");
 
         const message =
             document.getElementById("message");
 
 
-        function createEmail(nickname) {
+        function showMessage(text, type = "") {
 
-            const safeNickname =
-                nickname
-                    .trim()
-                    .toLowerCase()
-                    .replace(/[^a-z0-9]/g, "");
+            message.textContent = text;
 
-            return `${safeNickname}@russien18.gallery`;
+            message.className =
+                `message ${type}`;
 
         }
 
 
-        continueButton.addEventListener(
+        function createEmail(nickname) {
+
+            return nickname
+                .trim()
+                .toLowerCase()
+                .replace(/[^a-z0-9]/g, "")
+                + "@russien18.gallery";
+
+        }
+
+
+        function switchToSignUp() {
+
+            signUpTab.classList.add("active");
+
+            loginTab.classList.remove("active");
+
+            signUpForm.classList.add("active");
+
+            loginForm.classList.remove("active");
+
+            showMessage("");
+
+        }
+
+
+        function switchToLogin() {
+
+            loginTab.classList.add("active");
+
+            signUpTab.classList.remove("active");
+
+            loginForm.classList.add("active");
+
+            signUpForm.classList.remove("active");
+
+            showMessage("");
+
+        }
+
+
+        signUpTab.addEventListener(
             "click",
-            async () => {
+            switchToSignUp
+        );
+
+
+        loginTab.addEventListener(
+            "click",
+            switchToLogin
+        );
+
+
+        /*
+        ================================
+        SIGN UP
+        ================================
+        */
+
+        signUpForm.addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
 
                 const nickname =
-                    nicknameInput.value.trim();
+                    document
+                        .getElementById("signUpNickname")
+                        .value
+                        .trim();
+
 
                 const password =
-                    passwordInput.value;
+                    document
+                        .getElementById("signUpPassword")
+                        .value;
 
 
-                if (!nickname) {
+                const confirmPassword =
+                    document
+                        .getElementById("confirmPassword")
+                        .value;
 
-                    message.textContent =
-                        "Please enter your nickname.";
 
-                    message.className =
-                        "message error";
+                if (nickname.length < 2) {
+
+                    showMessage(
+                        "Please enter a nickname.",
+                        "error"
+                    );
 
                     return;
-
                 }
 
 
                 if (password.length < 6) {
 
-                    message.textContent =
-                        "Your password must be at least 6 characters.";
-
-                    message.className =
-                        "message error";
+                    showMessage(
+                        "Password must be at least 6 characters.",
+                        "error"
+                    );
 
                     return;
-
                 }
 
 
-                continueButton.disabled = true;
+                if (password !== confirmPassword) {
 
-                message.textContent =
-                    "Checking your access...";
+                    showMessage(
+                        "Passwords do not match.",
+                        "error"
+                    );
 
-                message.className =
-                    "message";
+                    return;
+                }
 
 
-                const email =
-                    createEmail(nickname);
+                const signUpButton =
+                    document.getElementById("signUpButton");
+
+
+                signUpButton.disabled = true;
+
+                signUpButton.textContent =
+                    "CREATING ACCOUNT...";
+
+
+                showMessage("");
 
 
                 try {
 
-                    /*
-                     * Try to create a new account first.
-                     */
+                    const email =
+                        createEmail(nickname);
 
-                    const signUpResponse =
+
+                    const response =
                         await fetch(
                             `${SUPABASE_URL}/auth/v1/signup`,
                             {
@@ -448,67 +713,100 @@
                         );
 
 
-                    const signUpData =
-                        await signUpResponse.json();
+                    const data =
+                        await response.json();
 
 
-                    /*
-                     * If the account already exists,
-                     * sign in instead.
-                     */
+                    if (!response.ok) {
 
-                    let session =
-                        signUpData.session;
-
-
-                    if (!session) {
-
-                        const signInResponse =
-                            await fetch(
-                                `${SUPABASE_URL}/auth/v1/token?grant_type=password`,
-                                {
-                                    method: "POST",
-
-                                    headers: {
-                                        "apikey":
-                                            SUPABASE_KEY,
-
-                                        "Content-Type":
-                                            "application/json"
-                                    },
-
-                                    body: JSON.stringify({
-                                        email: email,
-                                        password: password
-                                    })
-                                }
-                            );
-
-
-                        const signInData =
-                            await signInResponse.json();
-
-
-                        if (!signInResponse.ok) {
-
-                            throw new Error(
-                                "Incorrect nickname or password."
-                            );
-
-                        }
-
-
-                        session =
-                            signInData;
+                        throw new Error(
+                            data.message ||
+                            data.msg ||
+                            data.error_description ||
+                            "Unable to create account."
+                        );
 
                     }
 
 
-                    if (!session ||
-                        !session.access_token) {
+                    /*
+                    If Supabase immediately gives us
+                    a session, use it.
+                    */
+
+                    if (data.access_token) {
+
+                        sessionStorage.setItem(
+                            "russienNickname",
+                            nickname
+                        );
+
+                        sessionStorage.setItem(
+                            "russienAccessToken",
+                            data.access_token
+                        );
+
+                        sessionStorage.setItem(
+                            "russienRefreshToken",
+                            data.refresh_token || ""
+                        );
+
+
+                        showMessage(
+                            "Account created successfully!",
+                            "success"
+                        );
+
+
+                        setTimeout(() => {
+
+                            window.location.href =
+                                "upload.html";
+
+                        }, 800);
+
+
+                        return;
+                    }
+
+
+                    /*
+                    If there is no session,
+                    try logging in automatically.
+                    */
+
+                    const loginResponse =
+                        await fetch(
+                            `${SUPABASE_URL}/auth/v1/token?grant_type=password`,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "apikey":
+                                        SUPABASE_KEY,
+
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    email: email,
+                                    password: password
+                                })
+                            }
+                        );
+
+
+                    const loginData =
+                        await loginResponse.json();
+
+
+                    if (!loginResponse.ok) {
 
                         throw new Error(
-                            "Unable to create your guest session."
+                            loginData.error_description ||
+                            loginData.message ||
+                            "Account created, but automatic login failed."
                         );
 
                     }
@@ -519,24 +817,21 @@
                         nickname
                     );
 
-
                     sessionStorage.setItem(
                         "russienAccessToken",
-                        session.access_token
+                        loginData.access_token
                     );
-
 
                     sessionStorage.setItem(
                         "russienRefreshToken",
-                        session.refresh_token || ""
+                        loginData.refresh_token || ""
                     );
 
 
-                    message.textContent =
-                        "Welcome!";
-
-                    message.className =
-                        "message success";
+                    showMessage(
+                        "Account created successfully!",
+                        "success"
+                    );
 
 
                     setTimeout(() => {
@@ -544,22 +839,177 @@
                         window.location.href =
                             "upload.html";
 
-                    }, 600);
+                    }, 800);
 
 
                 } catch (error) {
 
-                    console.error(error);
+                    console.error(
+                        "SIGN UP ERROR:",
+                        error
+                    );
 
-                    message.textContent =
-                        error.message ||
-                        "Something went wrong. Please try again.";
 
-                    message.className =
-                        "message error";
+                    showMessage(
+                        error.message,
+                        "error"
+                    );
 
-                    continueButton.disabled =
+
+                    signUpButton.disabled =
                         false;
+
+                    signUpButton.textContent =
+                        "CREATE ACCOUNT";
+
+                }
+
+            }
+        );
+
+
+        /*
+        ================================
+        LOG IN
+        ================================
+        */
+
+        loginForm.addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                const nickname =
+                    document
+                        .getElementById("loginNickname")
+                        .value
+                        .trim();
+
+
+                const password =
+                    document
+                        .getElementById("loginPassword")
+                        .value;
+
+
+                if (!nickname || !password) {
+
+                    showMessage(
+                        "Please enter your nickname and password.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                const loginButton =
+                    document.getElementById("loginButton");
+
+
+                loginButton.disabled = true;
+
+                loginButton.textContent =
+                    "LOGGING IN...";
+
+
+                showMessage("");
+
+
+                try {
+
+                    const email =
+                        createEmail(nickname);
+
+
+                    const response =
+                        await fetch(
+                            `${SUPABASE_URL}/auth/v1/token?grant_type=password`,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "apikey":
+                                        SUPABASE_KEY,
+
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    email: email,
+                                    password: password
+                                })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.error_description ||
+                            data.message ||
+                            "Incorrect nickname or password."
+                        );
+
+                    }
+
+
+                    sessionStorage.setItem(
+                        "russienNickname",
+                        nickname
+                    );
+
+                    sessionStorage.setItem(
+                        "russienAccessToken",
+                        data.access_token
+                    );
+
+                    sessionStorage.setItem(
+                        "russienRefreshToken",
+                        data.refresh_token || ""
+                    );
+
+
+                    showMessage(
+                        "Login successful!",
+                        "success"
+                    );
+
+
+                    setTimeout(() => {
+
+                        window.location.href =
+                            "upload.html";
+
+                    }, 700);
+
+
+                } catch (error) {
+
+                    console.error(
+                        "LOGIN ERROR:",
+                        error
+                    );
+
+
+                    showMessage(
+                        error.message,
+                        "error"
+                    );
+
+
+                    loginButton.disabled =
+                        false;
+
+                    loginButton.textContent =
+                        "LOG IN";
 
                 }
 
