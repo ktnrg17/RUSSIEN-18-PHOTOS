@@ -342,7 +342,11 @@
         }
 
 
-        /* UPLoader name */
+        /*
+        =========================================
+        PHOTO UPLOADER NAME
+        =========================================
+        */
 
         .photo-info {
 
@@ -384,6 +388,87 @@
                     0,
                     0.18
                 );
+
+        }
+
+
+        /*
+        =========================================
+        DELETE BUTTON
+        =========================================
+        */
+
+        .delete-button {
+
+            position:
+                absolute;
+
+            top:
+                10px;
+
+            right:
+                10px;
+
+            border:
+                none;
+
+            border-radius:
+                8px;
+
+            padding:
+                7px 10px;
+
+            background:
+                rgba(
+                    255,
+                    253,
+                    251,
+                    0.88
+                );
+
+            color:
+                var(--pink-dark);
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size:
+                11px;
+
+            font-weight:
+                600;
+
+            cursor:
+                pointer;
+
+            backdrop-filter:
+                blur(5px);
+
+            transition:
+                0.25s ease;
+
+            z-index:
+                5;
+
+        }
+
+
+        .delete-button:hover {
+
+            background:
+                white;
+
+            transform:
+                translateY(-1px);
+
+        }
+
+
+        .delete-button:active {
+
+            transform:
+                translateY(0);
 
         }
 
@@ -508,6 +593,23 @@
 
 
             .nickname {
+
+                font-size:
+                    10px;
+
+            }
+
+
+            .delete-button {
+
+                top:
+                    7px;
+
+                right:
+                    7px;
+
+                padding:
+                    6px 8px;
 
                 font-size:
                     10px;
@@ -686,6 +788,283 @@
 
         /*
         =========================================
+        LOAD CURRENT USER
+        =========================================
+        */
+
+        async function getCurrentUser() {
+
+            const response =
+                await fetch(
+                    `${SUPABASE_URL}/auth/v1/user`,
+                    {
+                        method: "GET",
+
+                        headers: {
+
+                            "apikey":
+                                SUPABASE_KEY,
+
+                            "Authorization":
+                                `Bearer ${accessToken}`
+
+                        }
+
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Your login session has expired."
+                );
+
+            }
+
+
+            return await response.json();
+
+        }
+
+
+        /*
+        =========================================
+        DELETE PHOTO
+        =========================================
+        */
+
+        async function deletePhoto(
+            photo,
+            item,
+            user
+        ) {
+
+            /*
+            Make sure the photo belongs
+            to the currently logged-in user.
+            */
+
+            if (
+                photo.user_id !==
+                user.id
+            ) {
+
+                alert(
+                    "You can only delete your own photos."
+                );
+
+                return;
+
+            }
+
+
+            const confirmed =
+                confirm(
+                    "Delete this photo?"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            try {
+
+                /*
+                =========================================
+                GET STORAGE FILE PATH
+                =========================================
+                */
+
+                const marker =
+                    `/object/public/${BUCKET_NAME}/`;
+
+
+                const markerIndex =
+                    photo.photo_url.indexOf(
+                        marker
+                    );
+
+
+                if (
+                    markerIndex === -1
+                ) {
+
+                    throw new Error(
+                        "Unable to find the photo file."
+                    );
+
+                }
+
+
+                const filePath =
+                    decodeURIComponent(
+                        photo.photo_url.substring(
+                            markerIndex +
+                            marker.length
+                        )
+                    );
+
+
+                /*
+                =========================================
+                DELETE FILE FROM STORAGE
+                =========================================
+                */
+
+                const storageResponse =
+                    await fetch(
+                        `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}`,
+                        {
+
+                            method:
+                                "DELETE",
+
+                            headers: {
+
+                                "apikey":
+                                    SUPABASE_KEY,
+
+                                "Authorization":
+                                    `Bearer ${accessToken}`,
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    prefixes: [
+                                        filePath
+                                    ]
+                                })
+
+                        }
+                    );
+
+
+                if (
+                    !storageResponse.ok
+                ) {
+
+                    const errorText =
+                        await storageResponse.text();
+
+                    throw new Error(
+                        errorText ||
+                        "Unable to delete the photo from Storage."
+                    );
+
+                }
+
+
+                /*
+                =========================================
+                DELETE DATABASE RECORD
+                =========================================
+                */
+
+                const databaseResponse =
+                    await fetch(
+                        `${SUPABASE_URL}/rest/v1/photos?id=eq.${encodeURIComponent(photo.id)}`,
+                        {
+
+                            method:
+                                "DELETE",
+
+                            headers: {
+
+                                "apikey":
+                                    SUPABASE_KEY,
+
+                                "Authorization":
+                                    `Bearer ${accessToken}`,
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Prefer":
+                                    "return=minimal"
+
+                            }
+
+                        }
+                    );
+
+
+                if (
+                    !databaseResponse.ok
+                ) {
+
+                    const errorText =
+                        await databaseResponse.text();
+
+                    throw new Error(
+                        errorText ||
+                        "Unable to delete the photo record."
+                    );
+
+                }
+
+
+                /*
+                =========================================
+                REMOVE PHOTO FROM SCREEN
+                =========================================
+                */
+
+                item.remove();
+
+
+                /*
+                If there are no photos left,
+                show the empty message.
+                */
+
+                if (
+                    gallery.querySelector(
+                        ".gallery-item"
+                    ) === null
+                ) {
+
+                    gallery.innerHTML = `
+
+                        <div class="empty-message">
+
+                            No memories have been shared yet.
+
+                        </div>
+
+                    `;
+
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "DELETE ERROR:",
+                    error
+                );
+
+
+                alert(
+                    "Unable to delete photo: " +
+                    error.message
+                );
+
+            }
+
+        }
+
+
+        /*
+        =========================================
         LOAD GALLERY
         =========================================
         */
@@ -694,24 +1073,44 @@
 
             try {
 
+                /*
+                Get the currently logged-in
+                Supabase user.
+                */
+
+                const user =
+                    await getCurrentUser();
+
+
+                /*
+                Get ALL photos from the database.
+                */
+
                 const response =
                     await fetch(
                         `${SUPABASE_URL}/rest/v1/photos?select=id,nickname,photo_url,created_at,user_id&order=created_at.desc`,
                         {
-                            method: "GET",
+
+                            method:
+                                "GET",
 
                             headers: {
+
                                 "apikey":
                                     SUPABASE_KEY,
 
                                 "Authorization":
                                     `Bearer ${accessToken}`
+
                             }
+
                         }
                     );
 
 
-                if (!response.ok) {
+                if (
+                    !response.ok
+                ) {
 
                     const error =
                         await response.text();
@@ -727,18 +1126,32 @@
                     await response.json();
 
 
+                /*
+                Clear loading message.
+                */
+
                 gallery.innerHTML =
                     "";
 
+
+                /*
+                =========================================
+                NO PHOTOS
+                =========================================
+                */
 
                 if (
                     photos.length === 0
                 ) {
 
                     gallery.innerHTML = `
+
                         <div class="empty-message">
+
                             No memories have been shared yet.
+
                         </div>
+
                     `;
 
                     return;
@@ -747,7 +1160,9 @@
 
 
                 /*
-                SHOW ALL PHOTOS
+                =========================================
+                DISPLAY ALL PHOTOS
+                =========================================
                 */
 
                 photos.forEach(
@@ -762,6 +1177,12 @@
                         item.className =
                             "gallery-item";
 
+
+                        /*
+                        =========================================
+                        PHOTO
+                        =========================================
+                        */
 
                         const image =
                             document.createElement(
@@ -785,8 +1206,66 @@
 
 
                         /*
+                        =========================================
+                        DELETE BUTTON
+                        ONLY FOR PHOTO OWNER
+                        =========================================
+                        */
+
+                        if (
+                            photo.user_id ===
+                            user.id
+                        ) {
+
+                            const deleteButton =
+                                document.createElement(
+                                    "button"
+                                );
+
+
+                            deleteButton.className =
+                                "delete-button";
+
+
+                            deleteButton.textContent =
+                                "Delete";
+
+
+                            deleteButton.type =
+                                "button";
+
+
+                            deleteButton.setAttribute(
+                                "aria-label",
+                                `Delete photo uploaded by ${photo.nickname}`
+                            );
+
+
+                            deleteButton.addEventListener(
+                                "click",
+                                () => {
+
+                                    deletePhoto(
+                                        photo,
+                                        item,
+                                        user
+                                    );
+
+                                }
+                            );
+
+
+                            item.appendChild(
+                                deleteButton
+                            );
+
+                        }
+
+
+                        /*
+                        =========================================
                         UPLOADER NAME
-                        BOTTOM LEFT
+                        =========================================
                         */
 
                         const photoInfo =
@@ -840,19 +1319,31 @@
 
 
                 gallery.innerHTML = `
+
                     <div class="error">
+
                         Unable to load the gallery.
+
                         <br>
+
                         <small>
                             ${error.message}
                         </small>
+
                     </div>
+
                 `;
 
             }
 
         }
 
+
+        /*
+        =========================================
+        START GALLERY
+        =========================================
+        */
 
         loadGallery();
 
