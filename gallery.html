@@ -17,8 +17,16 @@
 
     <title>Russien @18 | Gallery</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500&family=Great+Vibes&display=swap"
@@ -47,6 +55,7 @@
 
         body {
             margin: 0;
+
             min-height: 100vh;
 
             font-family: "DM Sans", sans-serif;
@@ -66,19 +75,23 @@
 
         .gallery-page {
             width: 100%;
+
             max-width: 1200px;
+
             margin: auto;
         }
 
         .gallery-card {
-            background: rgba(255, 253, 251, 0.94);
+            background:
+                rgba(255, 253, 251, 0.94);
 
             border-radius: 32px;
 
             padding: 55px 30px;
 
             box-shadow:
-                0 20px 60px rgba(118, 86, 111, 0.15);
+                0 20px 60px
+                rgba(118, 86, 111, 0.15);
         }
 
         .script-title {
@@ -86,11 +99,14 @@
 
             text-align: center;
 
-            font-family: "Great Vibes", cursive;
+            font-family:
+                "Great Vibes",
+                cursive;
 
             font-size: 52px;
 
-            color: var(--pink-dark);
+            color:
+                var(--pink-dark);
         }
 
         h1 {
@@ -98,19 +114,24 @@
 
             text-align: center;
 
-            font-family: "Cormorant Garamond", serif;
+            font-family:
+                "Cormorant Garamond",
+                serif;
 
-            font-size: clamp(42px, 7vw, 70px);
+            font-size:
+                clamp(42px, 7vw, 70px);
 
             font-weight: 500;
 
-            color: var(--purple-dark);
+            color:
+                var(--purple-dark);
         }
 
         .description {
             max-width: 650px;
 
-            margin: 0 auto 45px;
+            margin:
+                0 auto 45px;
 
             text-align: center;
 
@@ -118,7 +139,8 @@
 
             line-height: 1.7;
 
-            color: var(--text);
+            color:
+                var(--text);
         }
 
         .gallery-grid {
@@ -131,17 +153,20 @@
         }
 
         .gallery-item {
-    position: relative;
+            position: relative;
 
-    overflow: hidden;
+            overflow: hidden;
 
-    border-radius: 20px;
+            border-radius: 20px;
 
-    background: var(--purple-light);
+            background:
+                var(--purple-light);
 
-    box-shadow:
-        0 8px 25px rgba(118, 86, 111, 0.12);
-}
+            box-shadow:
+                0 8px 25px
+                rgba(118, 86, 111, 0.12);
+        }
+
         .gallery-item img {
             display: block;
 
@@ -151,66 +176,136 @@
 
             object-fit: cover;
 
-            transition: transform 0.4s ease;
+            transition:
+                transform 0.4s ease;
         }
 
         .gallery-item:hover img {
-            transform: scale(1.04);
+            transform:
+                scale(1.04);
         }
 
         .photo-info {
-    position: absolute;
+            position: absolute;
 
-    left: 10px;
-    bottom: 10px;
+            left: 10px;
 
-    padding: 4px 9px;
+            bottom: 10px;
 
-    background: rgba(255, 253, 251, 0.82);
+            display: flex;
 
-    border-radius: 8px;
+            align-items: center;
 
-    backdrop-filter: blur(5px);
-}
+            gap: 7px;
 
-.nickname {
-    margin: 0;
+            padding: 4px 8px;
 
-    font-family: "DM Sans", sans-serif;
+            background:
+                rgba(
+                    255,
+                    253,
+                    251,
+                    0.82
+                );
 
-    font-size: 12px;
+            border-radius: 8px;
 
-    font-weight: 500;
+            backdrop-filter:
+                blur(5px);
+        }
 
-    color: var(--text);
-}
+        .nickname {
+            margin: 0;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size: 12px;
+
+            font-weight: 500;
+
+            color:
+                var(--text);
+        }
+
+        .delete-button {
+            border: none;
+
+            padding: 3px 6px;
+
+            border-radius: 6px;
+
+            background:
+                rgba(
+                    168,
+                    93,
+                    120,
+                    0.12
+                );
+
+            color:
+                var(--pink-dark);
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size: 10px;
+
+            cursor: pointer;
+
+            transition:
+                0.2s ease;
+        }
+
+        .delete-button:hover {
+            background:
+                var(--pink-dark);
+
+            color: white;
+        }
 
         .empty-message {
+            grid-column:
+                1 / -1;
+
             text-align: center;
 
             padding: 60px 20px;
 
-            font-family: "Cormorant Garamond", serif;
+            font-family:
+                "Cormorant Garamond",
+                serif;
 
             font-size: 26px;
 
-            color: var(--purple-dark);
+            color:
+                var(--purple-dark);
         }
 
         .loading {
+            grid-column:
+                1 / -1;
+
             text-align: center;
 
             padding: 50px;
 
-            color: var(--purple-dark);
+            color:
+                var(--purple-dark);
         }
 
         .error {
+            grid-column:
+                1 / -1;
+
             text-align: center;
 
             padding: 40px 20px;
 
-            color: var(--pink-dark);
+            color:
+                var(--pink-dark);
         }
 
 
@@ -235,7 +330,8 @@
             }
 
             .gallery-card {
-                padding: 40px 18px;
+                padding:
+                    40px 18px;
 
                 border-radius: 26px;
             }
@@ -266,11 +362,21 @@
             }
 
             .photo-info {
-                padding: 8px;
+                left: 7px;
+
+                bottom: 7px;
+
+                padding: 4px 6px;
             }
 
             .nickname {
-                font-size: 17px;
+                font-size: 10px;
+            }
+
+            .delete-button {
+                font-size: 9px;
+
+                padding: 3px 5px;
             }
 
         }
@@ -326,17 +432,86 @@
             "sb_publishable_nIm23K5lShcFGJ6m18DzaA_EAXQXGc0";
 
 
-        const gallery =
-            document.getElementById("gallery");
+        const BUCKET_NAME =
+            "photos";
 
+
+        const accessToken =
+            sessionStorage.getItem(
+                "russienAccessToken"
+            );
+
+
+        const gallery =
+            document.getElementById(
+                "gallery"
+            );
+
+
+        /*
+         * User must be logged in.
+         */
+
+        if (!accessToken) {
+
+            window.location.href =
+                "nickname.html";
+
+        }
+
+
+        /* =========================================
+           GET CURRENT USER
+        ========================================= */
+
+        async function getCurrentUser() {
+
+            const response =
+                await fetch(
+                    `${SUPABASE_URL}/auth/v1/user`,
+                    {
+                        method: "GET",
+
+                        headers: {
+                            "apikey":
+                                SUPABASE_KEY,
+
+                            "Authorization":
+                                `Bearer ${accessToken}`
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Your session has expired."
+                );
+
+            }
+
+
+            return await response.json();
+
+        }
+
+
+        /* =========================================
+           LOAD GALLERY
+        ========================================= */
 
         async function loadGallery() {
 
             try {
 
+                const user =
+                    await getCurrentUser();
+
+
                 const response =
                     await fetch(
-                        `${SUPABASE_URL}/rest/v1/photos?select=nickname,photo_url,created_at&order=created_at.desc`,
+                        `${SUPABASE_URL}/rest/v1/photos?select=id,nickname,photo_url,created_at,user_id&order=created_at.desc`,
                         {
                             method: "GET",
 
@@ -345,7 +520,7 @@
                                     SUPABASE_KEY,
 
                                 "Authorization":
-                                    `Bearer ${SUPABASE_KEY}`
+                                    `Bearer ${accessToken}`
                             }
                         }
                     );
@@ -356,7 +531,9 @@
                     const error =
                         await response.text();
 
-                    throw new Error(error);
+                    throw new Error(
+                        error
+                    );
 
                 }
 
@@ -365,7 +542,8 @@
                     await response.json();
 
 
-                gallery.innerHTML = "";
+                gallery.innerHTML =
+                    "";
 
 
                 if (photos.length === 0) {
@@ -384,39 +562,136 @@
                 photos.forEach(photo => {
 
                     const item =
-                        document.createElement("div");
+                        document.createElement(
+                            "div"
+                        );
+
 
                     item.className =
                         "gallery-item";
 
 
-                    item.innerHTML = `
-
-                        <img
-                            src="${photo.photo_url}"
-                            alt="Photo shared by ${photo.nickname}"
-                            loading="lazy"
-                        >
-
-                        <div class="photo-info">
-
-                            <p class="nickname">
-                                ${photo.nickname}
-                            </p>
-
-                        </div>
-
-                    `;
+                    const image =
+                        document.createElement(
+                            "img"
+                        );
 
 
-                    gallery.appendChild(item);
+                    image.src =
+                        photo.photo_url;
+
+
+                    image.alt =
+                        `Photo shared by ${photo.nickname}`;
+
+
+                    image.loading =
+                        "lazy";
+
+
+                    const photoInfo =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    photoInfo.className =
+                        "photo-info";
+
+
+                    const nicknameElement =
+                        document.createElement(
+                            "p"
+                        );
+
+
+                    nicknameElement.className =
+                        "nickname";
+
+
+                    nicknameElement.textContent =
+                        photo.nickname;
+
+
+                    photoInfo.appendChild(
+                        nicknameElement
+                    );
+
+
+                    /*
+                     * DELETE BUTTON
+                     *
+                     * Only show it when
+                     * this photo belongs
+                     * to the logged-in user.
+                     */
+
+                    if (
+                        photo.user_id ===
+                        user.id
+                    ) {
+
+                        const deleteButton =
+                            document.createElement(
+                                "button"
+                            );
+
+
+                        deleteButton.className =
+                            "delete-button";
+
+
+                        deleteButton.textContent =
+                            "Delete";
+
+
+                        deleteButton.type =
+                            "button";
+
+
+                        deleteButton.addEventListener(
+                            "click",
+                            () => {
+
+                                deletePhoto(
+                                    photo,
+                                    item
+                                );
+
+                            }
+                        );
+
+
+                        photoInfo.appendChild(
+                            deleteButton
+                        );
+
+                    }
+
+
+                    item.appendChild(
+                        image
+                    );
+
+
+                    item.appendChild(
+                        photoInfo
+                    );
+
+
+                    gallery.appendChild(
+                        item
+                    );
 
                 });
 
 
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "GALLERY ERROR:",
+                    error
+                );
 
 
                 gallery.innerHTML = `
@@ -428,6 +703,145 @@
                     </div>
 
                 `;
+
+            }
+
+        }
+
+
+        /* =========================================
+           DELETE PHOTO
+        ========================================= */
+
+        async function deletePhoto(
+            photo,
+            galleryItem
+        ) {
+
+            const confirmed =
+                confirm(
+                    "Delete this photo?"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            try {
+
+                /*
+                 * Get the Storage path
+                 * from the public URL.
+                 */
+
+                const publicPrefix =
+                    `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/`;
+
+
+                const filePath =
+                    decodeURIComponent(
+                        photo.photo_url
+                            .replace(
+                                publicPrefix,
+                                ""
+                            )
+                    );
+
+
+                /*
+                 * Delete the actual
+                 * image from Storage.
+                 */
+
+                const storageResponse =
+                    await fetch(
+                        `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${filePath}`,
+                        {
+                            method: "DELETE",
+
+                            headers: {
+                                "apikey":
+                                    SUPABASE_KEY,
+
+                                "Authorization":
+                                    `Bearer ${accessToken}`
+                            }
+                        }
+                    );
+
+
+                if (!storageResponse.ok) {
+
+                    const error =
+                        await storageResponse.text();
+
+                    throw new Error(
+                        error
+                    );
+
+                }
+
+
+                /*
+                 * Delete the database record.
+                 *
+                 * RLS makes sure the user
+                 * can only delete their
+                 * own record.
+                 */
+
+                const databaseResponse =
+                    await fetch(
+                        `${SUPABASE_URL}/rest/v1/photos?id=eq.${photo.id}`,
+                        {
+                            method: "DELETE",
+
+                            headers: {
+                                "apikey":
+                                    SUPABASE_KEY,
+
+                                "Authorization":
+                                    `Bearer ${accessToken}`
+                            }
+                        }
+                    );
+
+
+                if (!databaseResponse.ok) {
+
+                    const error =
+                        await databaseResponse.text();
+
+                    throw new Error(
+                        error
+                    );
+
+                }
+
+
+                /*
+                 * Remove the photo
+                 * immediately from the page.
+                 */
+
+                galleryItem.remove();
+
+
+            } catch (error) {
+
+                console.error(
+                    "DELETE ERROR:",
+                    error
+                );
+
+
+                alert(
+                    "Unable to delete this photo. Please try again."
+                );
 
             }
 
