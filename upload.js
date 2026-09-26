@@ -333,6 +333,9 @@ uploadButton.addEventListener("click", async () => {
     message.className =
         "message error";
 
+    progressText.textContent =
+        "Upload failed.";
+
     uploadButton.disabled =
         false;
 
