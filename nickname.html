@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#fbe8ef"
+    >
+
+    <title>Russien @18 | Your Name</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500&family=Great+Vibes&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="upload.css">
+</head>
+
+<body>
+
+    <main class="upload-page">
+
+        <section class="upload-card">
+
+            <p class="script-title">
+                Russien @18
+            </p>
+
+            <h1>
+                Welcome
+            </h1>
+
+            <p class="description">
+                Before sharing your photos, please enter your nickname.
+            </p>
+
+            <div class="nickname-section">
+
+                <label for="nickname">
+                    Your Nickname
+                </label>
+
+                <input
+                    type="text"
+                    id="nickname"
+                    placeholder="Enter your nickname"
+                    maxlength="30"
+                    autocomplete="off"
+                >
+
+                <p class="nickname-note">
+                    Your nickname will appear with your photos.
+                </p>
+
+            </div>
+
+            <button
+                id="continueButton"
+                class="submit-button"
+                type="button"
+            >
+                Continue
+            </button>
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+            <p class="footer-note">
+                Thank you for being part of Russien's special day.
+            </p>
+
+        </section>
+
+    </main>
+
+    <script>
+
+        const nicknameInput =
+            document.getElementById("nickname");
+
+        const continueButton =
+            document.getElementById("continueButton");
+
+        const message =
+            document.getElementById("message");
+
+
+        continueButton.addEventListener("click", () => {
+
+            const nickname =
+                nicknameInput.value.trim();
+
+
+            if (!nickname) {
+
+                message.textContent =
+                    "Please enter your nickname.";
+
+                message.className =
+                    "message error";
+
+                return;
+            }
+
+
+            sessionStorage.setItem(
+                "russienNickname",
+                nickname
+            );
+
+
+            window.location.href =
+                "upload.html";
+
+        });
+
+
+        nicknameInput.addEventListener("keydown", (event) => {
+
+            if (event.key === "Enter") {
+
+                continueButton.click();
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
