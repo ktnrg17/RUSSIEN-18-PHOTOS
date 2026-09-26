@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -14,18 +15,247 @@
         content="#fbe8ef"
     >
 
-    <title>Russien @18 | Your Name</title>
+    <title>Russien @18 | Guest Access</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500&family=Great+Vibes&display=swap"
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="upload.css">
+    <style>
+
+        :root {
+            --pink-light: #fbe8ef;
+            --pink: #e9a9bd;
+            --pink-dark: #a85d78;
+
+            --purple-light: #eee5f3;
+            --purple: #b59ac5;
+            --purple-dark: #76566f;
+
+            --pearl: #fffdfb;
+            --cream: #fff8f8;
+            --text: #553f4c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            font-family: "DM Sans", sans-serif;
+
+            color: var(--text);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--pink-light),
+                    var(--purple-light),
+                    var(--cream)
+                );
+        }
+
+        .upload-page {
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .upload-card {
+            background: rgba(255, 253, 251, 0.94);
+
+            border-radius: 32px;
+
+            padding: 55px 35px;
+
+            box-shadow:
+                0 20px 60px rgba(118, 86, 111, 0.15);
+
+            text-align: center;
+        }
+
+        .script-title {
+            margin: 0;
+
+            font-family: "Great Vibes", cursive;
+
+            font-size: 52px;
+
+            color: var(--pink-dark);
+        }
+
+        h1 {
+            margin: 12px 0 10px;
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: clamp(42px, 7vw, 65px);
+
+            font-weight: 500;
+
+            color: var(--purple-dark);
+        }
+
+        .description {
+            max-width: 500px;
+
+            margin: 0 auto 35px;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            color: var(--purple-dark);
+        }
+
+        .input-group input {
+            width: 100%;
+
+            padding: 15px 18px;
+
+            border: 1px solid var(--pink);
+
+            border-radius: 14px;
+
+            outline: none;
+
+            background: var(--cream);
+
+            color: var(--text);
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 16px;
+
+            transition: 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: var(--purple);
+
+            box-shadow:
+                0 0 0 4px rgba(181, 154, 197, 0.15);
+        }
+
+        .continue-button {
+            width: 100%;
+
+            margin-top: 10px;
+
+            padding: 15px 20px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            background: var(--pink-dark);
+
+            color: white;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+        }
+
+        .continue-button:hover {
+            transform: translateY(-2px);
+
+            opacity: 0.92;
+        }
+
+        .continue-button:disabled {
+            opacity: 0.6;
+
+            cursor: not-allowed;
+        }
+
+        .message {
+            min-height: 24px;
+
+            margin-top: 18px;
+
+            font-size: 14px;
+        }
+
+        .message.error {
+            color: var(--pink-dark);
+        }
+
+        .message.success {
+            color: var(--purple-dark);
+        }
+
+        .footer-note {
+            margin-top: 30px;
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 18px;
+
+            color: var(--purple-dark);
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .upload-card {
+                padding: 40px 22px;
+
+                border-radius: 26px;
+            }
+
+            .script-title {
+                font-size: 43px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
@@ -38,58 +268,87 @@
             </p>
 
             <h1>
-                Welcome
+                Your Memories
             </h1>
 
             <p class="description">
-                Before sharing your photos, please enter your nickname.
+                Enter your nickname and create a password
+                to share and manage your photos.
             </p>
 
-            <div class="nickname-section">
 
-                <label for="nickname">
-                    Your Nickname
+            <div class="input-group">
+
+                <label for="nicknameInput">
+                    Nickname
                 </label>
 
                 <input
                     type="text"
-                    id="nickname"
+                    id="nicknameInput"
                     placeholder="Enter your nickname"
                     maxlength="30"
-                    autocomplete="off"
+                    autocomplete="username"
                 >
-
-                <p class="nickname-note">
-                    Your nickname will appear with your photos.
-                </p>
 
             </div>
 
+
+            <div class="input-group">
+
+                <label for="passwordInput">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="passwordInput"
+                    placeholder="Create a password"
+                    minlength="6"
+                    autocomplete="current-password"
+                >
+
+            </div>
+
+
             <button
                 id="continueButton"
-                class="submit-button"
+                class="continue-button"
                 type="button"
             >
                 Continue
             </button>
+
 
             <div
                 id="message"
                 class="message"
             ></div>
 
+
             <p class="footer-note">
-                Thank you for being part of Russien's special day.
+                Your password lets you manage your own photos.
             </p>
 
         </section>
 
     </main>
 
+
     <script>
 
+        const SUPABASE_URL =
+            "https://magaomtlctseieufgijk.supabase.co";
+
+        const SUPABASE_KEY =
+            "sb_publishable_nIm23K5lShcFGJ6m18DzaA_EAXQXGc0";
+
+
         const nicknameInput =
-            document.getElementById("nickname");
+            document.getElementById("nicknameInput");
+
+        const passwordInput =
+            document.getElementById("passwordInput");
 
         const continueButton =
             document.getElementById("continueButton");
@@ -98,45 +357,214 @@
             document.getElementById("message");
 
 
-        continueButton.addEventListener("click", () => {
+        function createEmail(nickname) {
 
-            const nickname =
-                nicknameInput.value.trim();
+            const safeNickname =
+                nickname
+                    .trim()
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]/g, "");
+
+            return `${safeNickname}@russien18.gallery`;
+
+        }
 
 
-            if (!nickname) {
+        continueButton.addEventListener(
+            "click",
+            async () => {
+
+                const nickname =
+                    nicknameInput.value.trim();
+
+                const password =
+                    passwordInput.value;
+
+
+                if (!nickname) {
+
+                    message.textContent =
+                        "Please enter your nickname.";
+
+                    message.className =
+                        "message error";
+
+                    return;
+
+                }
+
+
+                if (password.length < 6) {
+
+                    message.textContent =
+                        "Your password must be at least 6 characters.";
+
+                    message.className =
+                        "message error";
+
+                    return;
+
+                }
+
+
+                continueButton.disabled = true;
 
                 message.textContent =
-                    "Please enter your nickname.";
+                    "Checking your access...";
 
                 message.className =
-                    "message error";
+                    "message";
 
-                return;
+
+                const email =
+                    createEmail(nickname);
+
+
+                try {
+
+                    /*
+                     * Try to create a new account first.
+                     */
+
+                    const signUpResponse =
+                        await fetch(
+                            `${SUPABASE_URL}/auth/v1/signup`,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "apikey":
+                                        SUPABASE_KEY,
+
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    email: email,
+                                    password: password
+                                })
+                            }
+                        );
+
+
+                    const signUpData =
+                        await signUpResponse.json();
+
+
+                    /*
+                     * If the account already exists,
+                     * sign in instead.
+                     */
+
+                    let session =
+                        signUpData.session;
+
+
+                    if (!session) {
+
+                        const signInResponse =
+                            await fetch(
+                                `${SUPABASE_URL}/auth/v1/token?grant_type=password`,
+                                {
+                                    method: "POST",
+
+                                    headers: {
+                                        "apikey":
+                                            SUPABASE_KEY,
+
+                                        "Content-Type":
+                                            "application/json"
+                                    },
+
+                                    body: JSON.stringify({
+                                        email: email,
+                                        password: password
+                                    })
+                                }
+                            );
+
+
+                        const signInData =
+                            await signInResponse.json();
+
+
+                        if (!signInResponse.ok) {
+
+                            throw new Error(
+                                "Incorrect nickname or password."
+                            );
+
+                        }
+
+
+                        session =
+                            signInData;
+
+                    }
+
+
+                    if (!session ||
+                        !session.access_token) {
+
+                        throw new Error(
+                            "Unable to create your guest session."
+                        );
+
+                    }
+
+
+                    sessionStorage.setItem(
+                        "russienNickname",
+                        nickname
+                    );
+
+
+                    sessionStorage.setItem(
+                        "russienAccessToken",
+                        session.access_token
+                    );
+
+
+                    sessionStorage.setItem(
+                        "russienRefreshToken",
+                        session.refresh_token || ""
+                    );
+
+
+                    message.textContent =
+                        "Welcome!";
+
+                    message.className =
+                        "message success";
+
+
+                    setTimeout(() => {
+
+                        window.location.href =
+                            "upload.html";
+
+                    }, 600);
+
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    message.textContent =
+                        error.message ||
+                        "Something went wrong. Please try again.";
+
+                    message.className =
+                        "message error";
+
+                    continueButton.disabled =
+                        false;
+
+                }
+
             }
-
-
-            sessionStorage.setItem(
-                "russienNickname",
-                nickname
-            );
-
-
-            window.location.href =
-                "upload.html";
-
-        });
-
-
-        nicknameInput.addEventListener("keydown", (event) => {
-
-            if (event.key === "Enter") {
-
-                continueButton.click();
-
-            }
-
-        });
+        );
 
     </script>
 
