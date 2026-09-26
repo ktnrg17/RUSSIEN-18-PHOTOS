@@ -158,22 +158,31 @@
         }
 
         .photo-info {
-            padding: 12px 15px;
+    position: absolute;
 
-            text-align: center;
+    left: 10px;
+    bottom: 10px;
 
-            background: var(--pearl);
-        }
+    padding: 4px 9px;
 
-        .nickname {
-            margin: 0;
+    background: rgba(255, 253, 251, 0.82);
 
-            font-family: "Cormorant Garamond", serif;
+    border-radius: 8px;
 
-            font-size: 20px;
+    backdrop-filter: blur(5px);
+}
 
-            color: var(--purple-dark);
-        }
+.nickname {
+    margin: 0;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    color: var(--text);
+}
 
         .empty-message {
             text-align: center;
