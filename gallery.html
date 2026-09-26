@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#fbe8ef"
+    >
+
+    <title>Russien @18 | Gallery</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500&family=Great+Vibes&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="upload.css">
+
+</head>
+
+<body>
+
+    <main class="upload-page">
+
+        <section class="upload-card">
+
+            <p class="script-title">
+                Russien @18
+            </p>
+
+            <h1>
+                Celebration Gallery
+            </h1>
+
+            <p class="description">
+                Moments shared by family and friends.
+            </p>
+
+            <div
+                id="gallery"
+                class="gallery"
+            ></div>
+
+            <p
+                id="galleryMessage"
+                class="message"
+            >
+                Loading memories...
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://magaomtlctseieufgijk.supabase.co";
+
+        const SUPABASE_KEY =
+            "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE";
+
+
+        const gallery =
+            document.getElementById("gallery");
+
+        const galleryMessage =
+            document.getElementById("galleryMessage");
+
+
+        async function loadGallery() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${SUPABASE_URL}/rest/v1/photos?select=nickname,photo_url,created_at&order=created_at.desc`,
+                        {
+                            headers: {
+                                "apikey":
+                                    SUPABASE_KEY,
+
+                                "Authorization":
+                                    `Bearer ${SUPABASE_KEY}`
+                            }
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        await response.text()
+                    );
+
+                }
+
+
+                const photos =
+                    await response.json();
+
+
+                gallery.innerHTML = "";
+
+
+                if (photos.length === 0) {
+
+                    galleryMessage.textContent =
+                        "No photos have been shared yet.";
+
+                    return;
+
+                }
+
+
+                galleryMessage.textContent = "";
+
+
+                photos.forEach(photo => {
+
+                    const item =
+                        document.createElement("div");
+
+                    item.className =
+                        "gallery-item";
+
+
+                    const image =
+                        document.createElement("img");
+
+                    image.src =
+                        photo.photo_url;
+
+                    image.alt =
+                        `Photo shared by ${photo.nickname}`;
+
+                    image.loading =
+                        "lazy";
+
+
+                    const name =
+                        document.createElement("p");
+
+                    name.textContent =
+                        `Shared by ${photo.nickname}`;
+
+
+                    item.appendChild(image);
+
+                    item.appendChild(name);
+
+                    gallery.appendChild(item);
+
+                });
+
+            } catch (error) {
+
+                console.error(error);
+
+                galleryMessage.textContent =
+                    "Unable to load the gallery right now.";
+
+                galleryMessage.className =
+                    "message error";
+
+            }
+
+        }
+
+
+        loadGallery();
+
+    </script>
+
+</body>
+
+</html>
