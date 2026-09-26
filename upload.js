@@ -43,9 +43,11 @@ const accessToken =
     sessionStorage.getItem("russienAccessToken");
 
 
-/* =========================================
-   CHECK LOGIN
-========================================= */
+/*
+=========================================
+CHECK LOGIN
+=========================================
+*/
 
 if (!nickname || !accessToken) {
 
@@ -55,99 +57,111 @@ if (!nickname || !accessToken) {
 }
 
 
-/* =========================================
-   PHOTO SELECTION
-========================================= */
+/*
+=========================================
+SELECT PHOTOS
+=========================================
+*/
 
-photoInput.addEventListener("change", () => {
+photoInput.addEventListener(
+    "change",
+    () => {
 
-    const files =
-        Array.from(photoInput.files);
+        const files =
+            Array.from(photoInput.files);
 
 
-    if (files.length > MAX_PHOTOS) {
+        if (files.length > MAX_PHOTOS) {
+
+            message.textContent =
+                "Please select no more than 20 photos.";
+
+            message.className =
+                "message error";
+
+            photoInput.value = "";
+
+            fileCount.textContent =
+                "No photos selected";
+
+            previewContainer.innerHTML =
+                "";
+
+            uploadButton.disabled =
+                true;
+
+            return;
+
+        }
+
 
         message.textContent =
-            "Please select no more than 20 photos.";
+            "";
 
         message.className =
-            "message error";
+            "message";
 
-        photoInput.value = "";
 
         fileCount.textContent =
-            "No photos selected";
+            files.length === 0
+                ? "No photos selected"
+                : `${files.length} photo${files.length > 1 ? "s" : ""} selected`;
 
-        previewContainer.innerHTML = "";
 
-        uploadButton.disabled = true;
+        previewContainer.innerHTML =
+            "";
 
-        return;
+
+        files.forEach(file => {
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                event => {
+
+                    const item =
+                        document.createElement("div");
+
+                    item.className =
+                        "preview-item";
+
+
+                    const image =
+                        document.createElement("img");
+
+                    image.src =
+                        event.target.result;
+
+                    image.alt =
+                        "Selected photo";
+
+
+                    item.appendChild(image);
+
+                    previewContainer.appendChild(item);
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        });
+
+
+        uploadButton.disabled =
+            files.length === 0;
 
     }
+);
 
 
-    message.textContent = "";
-
-    message.className =
-        "message";
-
-
-    fileCount.textContent =
-        files.length === 0
-            ? "No photos selected"
-            : `${files.length} photo${files.length > 1 ? "s" : ""} selected`;
-
-
-    previewContainer.innerHTML = "";
-
-
-    files.forEach(file => {
-
-        const reader =
-            new FileReader();
-
-
-        reader.onload = event => {
-
-            const item =
-                document.createElement("div");
-
-            item.className =
-                "preview-item";
-
-
-            const image =
-                document.createElement("img");
-
-            image.src =
-                event.target.result;
-
-            image.alt =
-                "Selected photo";
-
-
-            item.appendChild(image);
-
-            previewContainer.appendChild(item);
-
-        };
-
-
-        reader.readAsDataURL(file);
-
-    });
-
-
-    uploadButton.disabled =
-        files.length === 0;
-
-});
-
-
-/* =========================================
-   UPLOAD
-========================================= */
+/*
+=========================================
+UPLOAD PHOTOS
+=========================================
+*/
 
 uploadButton.addEventListener(
     "click",
@@ -174,24 +188,30 @@ uploadButton.addEventListener(
         }
 
 
-        uploadButton.disabled = true;
+        uploadButton.disabled =
+            true;
 
-        progressContainer.hidden = false;
 
-        message.textContent = "";
+        progressContainer.hidden =
+            false;
+
+
+        message.textContent =
+            "";
 
         message.className =
             "message";
 
 
-        let uploadedCount = 0;
+        let uploadedCount =
+            0;
 
 
         try {
 
             /*
-             * Get the currently logged-in user.
-             */
+            Get current Supabase user
+            */
 
             const userResponse =
                 await fetch(
@@ -213,7 +233,7 @@ uploadButton.addEventListener(
             if (!userResponse.ok) {
 
                 throw new Error(
-                    "Your session has expired. Please log in again."
+                    "Your login session has expired. Please log in again."
                 );
 
             }
@@ -223,38 +243,45 @@ uploadButton.addEventListener(
                 await userResponse.json();
 
 
+            /*
+            Upload every selected photo
+            */
+
             for (const file of files) {
 
-                uploadedCount++;
-
-
                 progressText.textContent =
-                    `Uploading photo ${uploadedCount} of ${files.length}...`;
+                    `Uploading photo ${uploadedCount + 1} of ${files.length}...`;
 
 
-                progressBar.style.width =
-                    `${((uploadedCount - 1) / files.length) * 100}%`;
+                const safeNickname =
+                    nickname
+                        .replace(
+                            /[^a-zA-Z0-9_-]/g,
+                            "_"
+                        )
+                        .substring(
+                            0,
+                            30
+                        );
 
-
-                /*
-                 * IMPORTANT:
-                 * The user's ID is the first folder.
-                 *
-                 * This allows Supabase to know
-                 * which files belong to this user.
-                 */
 
                 const fileName =
                     `${Date.now()}-${crypto.randomUUID()}-${file.name}`;
 
 
+                /*
+                IMPORTANT:
+                First folder = user ID.
+                This is used for delete permissions.
+                */
+
                 const filePath =
-                    `${user.id}/${fileName}`;
+                    `${user.id}/${safeNickname}/${fileName}`;
 
 
-                /* =====================================
-                   UPLOAD PHOTO TO STORAGE
-                ===================================== */
+                /*
+                Upload file to Storage
+                */
 
                 const uploadResponse =
                     await fetch(
@@ -290,17 +317,17 @@ uploadButton.addEventListener(
                 }
 
 
-                /* =====================================
-                   CREATE PUBLIC PHOTO URL
-                ===================================== */
+                /*
+                Create public image URL
+                */
 
                 const photoUrl =
                     `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${filePath}`;
 
 
-                /* =====================================
-                   SAVE PHOTO INFORMATION
-                ===================================== */
+                /*
+                Save photo information
+                */
 
                 const databaseResponse =
                     await fetch(
@@ -323,6 +350,7 @@ uploadButton.addEventListener(
                             },
 
                             body: JSON.stringify({
+
                                 nickname:
                                     nickname,
 
@@ -331,6 +359,7 @@ uploadButton.addEventListener(
 
                                 user_id:
                                     user.id
+
                             })
                         }
                     );
@@ -348,11 +377,18 @@ uploadButton.addEventListener(
                 }
 
 
+                uploadedCount++;
+
+
                 progressBar.style.width =
                     `${(uploadedCount / files.length) * 100}%`;
 
             }
 
+
+            /*
+            Finished
+            */
 
             progressText.textContent =
                 "All photos uploaded successfully!";
@@ -363,6 +399,18 @@ uploadButton.addEventListener(
 
             message.className =
                 "message success";
+
+
+            photoInput.value =
+                "";
+
+
+            fileCount.textContent =
+                "No photos selected";
+
+
+            previewContainer.innerHTML =
+                "";
 
 
             setTimeout(() => {
@@ -399,4 +447,4 @@ uploadButton.addEventListener(
         }
 
     }
-);
+)
