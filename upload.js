@@ -323,21 +323,19 @@ uploadButton.addEventListener("click", async () => {
         }, 1500);
 
 
-    } catch (error) {
+} catch (error) {
 
-        console.error(error);
+    console.error("UPLOAD ERROR:", error);
 
+    message.textContent =
+        "Upload error: " + error.message;
 
-        message.textContent =
-            "Something went wrong while uploading. Please try again.";
+    message.className =
+        "message error";
 
-        message.className =
-            "message error";
+    uploadButton.disabled =
+        false;
 
-
-        uploadButton.disabled =
-            false;
-
-    }
+}
 
 });
