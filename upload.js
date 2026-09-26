@@ -39,12 +39,15 @@ const progressText =
 const nickname =
     sessionStorage.getItem("russienNickname");
 
+const accessToken =
+    sessionStorage.getItem("russienAccessToken");
+
 
 /* =========================================
-   CHECK NICKNAME
+   CHECK LOGIN
 ========================================= */
 
-if (!nickname) {
+if (!nickname || !accessToken) {
 
     window.location.href =
         "nickname.html";
@@ -146,199 +149,254 @@ photoInput.addEventListener("change", () => {
    UPLOAD
 ========================================= */
 
-uploadButton.addEventListener("click", async () => {
+uploadButton.addEventListener(
+    "click",
+    async () => {
 
-    const files =
-        Array.from(photoInput.files);
-
-
-    if (!nickname) {
-
-        window.location.href =
-            "nickname.html";
-
-        return;
-
-    }
+        const files =
+            Array.from(photoInput.files);
 
 
-    if (files.length === 0) {
+        if (!nickname || !accessToken) {
 
-        return;
+            window.location.href =
+                "nickname.html";
 
-    }
-
-
-    uploadButton.disabled = true;
-
-    progressContainer.hidden = false;
-
-    message.textContent = "";
-
-    message.className =
-        "message";
-
-
-    let uploadedCount = 0;
-
-
-    try {
-
-        for (const file of files) {
-
-            uploadedCount++;
-
-
-            progressText.textContent =
-                `Uploading photo ${uploadedCount} of ${files.length}...`;
-
-
-            progressBar.style.width =
-                `${((uploadedCount - 1) / files.length) * 100}%`;
-
-
-            const safeNickname =
-                nickname
-                    .replace(/[^a-zA-Z0-9_-]/g, "_")
-                    .substring(0, 30);
-
-
-            const fileName =
-                `${Date.now()}-${crypto.randomUUID()}-${file.name}`;
-
-
-            const filePath =
-                `${safeNickname}/${fileName}`;
-
-
-            /* UPLOAD PHOTO */
-
-            const uploadResponse =
-                await fetch(
-                    `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${filePath}`,
-                    {
-                        method: "POST",
-
-                        headers: {
-                            "Authorization":
-                                `Bearer ${SUPABASE_KEY}`,
-
-                            "apikey":
-                                SUPABASE_KEY,
-
-                            "Content-Type":
-                                file.type
-                        },
-
-                        body: file
-                    }
-                );
-
-
-            if (!uploadResponse.ok) {
-
-                const errorText =
-                    await uploadResponse.text();
-
-                throw new Error(
-                    errorText
-                );
-
-            }
-
-
-            /* CREATE PUBLIC URL */
-
-            const photoUrl =
-                `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${filePath}`;
-
-
-            /* SAVE PHOTO INFORMATION */
-
-            const databaseResponse =
-                await fetch(
-                    `${SUPABASE_URL}/rest/v1/photos`,
-                    {
-                        method: "POST",
-
-                        headers: {
-                            "Authorization":
-                                `Bearer ${SUPABASE_KEY}`,
-
-                            "apikey":
-                                SUPABASE_KEY,
-
-                            "Content-Type":
-                                "application/json",
-
-                            "Prefer":
-                                "return=minimal"
-                        },
-
-                        body: JSON.stringify({
-                            nickname:
-                                nickname,
-
-                            photo_url:
-                                photoUrl
-                        })
-                    }
-                );
-
-
-            if (!databaseResponse.ok) {
-
-                const errorText =
-                    await databaseResponse.text();
-
-                throw new Error(
-                    errorText
-                );
-
-            }
-
-
-            progressBar.style.width =
-                `${(uploadedCount / files.length) * 100}%`;
+            return;
 
         }
 
 
-        progressText.textContent =
-            "All photos uploaded successfully!";
+        if (files.length === 0) {
+
+            return;
+
+        }
 
 
-        message.textContent =
-            "Your memories have been added to the celebration gallery.";
+        uploadButton.disabled = true;
+
+        progressContainer.hidden = false;
+
+        message.textContent = "";
 
         message.className =
-            "message success";
+            "message";
 
 
-        setTimeout(() => {
-
-            window.location.href =
-                "gallery.html";
-
-        }, 1500);
+        let uploadedCount = 0;
 
 
-} catch (error) {
+        try {
 
-    console.error("UPLOAD ERROR:", error);
+            /*
+             * Get the currently logged-in user.
+             */
 
-    message.textContent =
-        "Upload error: " + error.message;
+            const userResponse =
+                await fetch(
+                    `${SUPABASE_URL}/auth/v1/user`,
+                    {
+                        method: "GET",
 
-    message.className =
-        "message error";
+                        headers: {
+                            "apikey":
+                                SUPABASE_KEY,
 
-    progressText.textContent =
-        "Upload failed.";
+                            "Authorization":
+                                `Bearer ${accessToken}`
+                        }
+                    }
+                );
 
-    uploadButton.disabled =
-        false;
 
-}
+            if (!userResponse.ok) {
 
-});
+                throw new Error(
+                    "Your session has expired. Please log in again."
+                );
+
+            }
+
+
+            const user =
+                await userResponse.json();
+
+
+            for (const file of files) {
+
+                uploadedCount++;
+
+
+                progressText.textContent =
+                    `Uploading photo ${uploadedCount} of ${files.length}...`;
+
+
+                progressBar.style.width =
+                    `${((uploadedCount - 1) / files.length) * 100}%`;
+
+
+                /*
+                 * IMPORTANT:
+                 * The user's ID is the first folder.
+                 *
+                 * This allows Supabase to know
+                 * which files belong to this user.
+                 */
+
+                const fileName =
+                    `${Date.now()}-${crypto.randomUUID()}-${file.name}`;
+
+
+                const filePath =
+                    `${user.id}/${fileName}`;
+
+
+                /* =====================================
+                   UPLOAD PHOTO TO STORAGE
+                ===================================== */
+
+                const uploadResponse =
+                    await fetch(
+                        `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${filePath}`,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Authorization":
+                                    `Bearer ${accessToken}`,
+
+                                "apikey":
+                                    SUPABASE_KEY,
+
+                                "Content-Type":
+                                    file.type
+                            },
+
+                            body: file
+                        }
+                    );
+
+
+                if (!uploadResponse.ok) {
+
+                    const errorText =
+                        await uploadResponse.text();
+
+                    throw new Error(
+                        errorText
+                    );
+
+                }
+
+
+                /* =====================================
+                   CREATE PUBLIC PHOTO URL
+                ===================================== */
+
+                const photoUrl =
+                    `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${filePath}`;
+
+
+                /* =====================================
+                   SAVE PHOTO INFORMATION
+                ===================================== */
+
+                const databaseResponse =
+                    await fetch(
+                        `${SUPABASE_URL}/rest/v1/photos`,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Authorization":
+                                    `Bearer ${accessToken}`,
+
+                                "apikey":
+                                    SUPABASE_KEY,
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Prefer":
+                                    "return=minimal"
+                            },
+
+                            body: JSON.stringify({
+                                nickname:
+                                    nickname,
+
+                                photo_url:
+                                    photoUrl,
+
+                                user_id:
+                                    user.id
+                            })
+                        }
+                    );
+
+
+                if (!databaseResponse.ok) {
+
+                    const errorText =
+                        await databaseResponse.text();
+
+                    throw new Error(
+                        errorText
+                    );
+
+                }
+
+
+                progressBar.style.width =
+                    `${(uploadedCount / files.length) * 100}%`;
+
+            }
+
+
+            progressText.textContent =
+                "All photos uploaded successfully!";
+
+
+            message.textContent =
+                "Your memories have been added to the celebration gallery.";
+
+            message.className =
+                "message success";
+
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "gallery.html";
+
+            }, 1200);
+
+
+        } catch (error) {
+
+            console.error(
+                "UPLOAD ERROR:",
+                error
+            );
+
+
+            message.textContent =
+                "Upload error: " +
+                error.message;
+
+            message.className =
+                "message error";
+
+
+            progressText.textContent =
+                "Upload failed.";
+
+
+            uploadButton.disabled =
+                false;
+
+        }
+
+    }
+);
