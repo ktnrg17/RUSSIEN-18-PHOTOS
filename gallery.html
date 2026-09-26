@@ -12,15 +12,15 @@
 
     <meta
         name="theme-color"
-        content="#fbe8ef"
+        content="#f8dce8"
     >
 
-    <title>Russien @18 | Gallery</title>
+    <title>Russien @18 — Memories</title>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+
+    <!-- GOOGLE FONTS -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link
         rel="preconnect"
@@ -29,13 +29,15 @@
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500&family=Great+Vibes&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Great+Vibes&display=swap"
         rel="stylesheet"
     >
+
 
     <style>
 
         :root {
+
             --pink-light: #fbe8ef;
             --pink: #e9a9bd;
             --pink-dark: #a85d78;
@@ -47,158 +49,312 @@
             --pearl: #fffdfb;
             --cream: #fff8f8;
             --text: #553f4c;
+
         }
+
 
         * {
+
             box-sizing: border-box;
+
+            margin: 0;
+
+            padding: 0;
+
         }
 
+
         body {
-            margin: 0;
 
             min-height: 100vh;
 
-            font-family: "DM Sans", sans-serif;
+            background:
+
+                radial-gradient(
+                    circle at top left,
+                    var(--purple-light),
+                    transparent 35%
+                ),
+
+                radial-gradient(
+                    circle at bottom right,
+                    var(--pink-light),
+                    transparent 40%
+                ),
+
+                var(--cream);
 
             color: var(--text);
 
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--pink-light),
-                    var(--purple-light),
-                    var(--cream)
-                );
+            font-family:
+                "DM Sans",
+                sans-serif;
 
-            padding: 30px 18px;
+            padding:
+                45px 25px;
+
         }
 
-        .gallery-page {
-            width: 100%;
 
-            max-width: 1200px;
+        .page {
 
-            margin: auto;
+            max-width:
+                1200px;
+
+            margin:
+                0 auto;
+
         }
 
-        .gallery-card {
-            background:
-                rgba(255, 253, 251, 0.94);
 
-            border-radius: 32px;
+        .header {
 
-            padding: 55px 30px;
+            text-align:
+                center;
 
-            box-shadow:
-                0 20px 60px
-                rgba(118, 86, 111, 0.15);
+            margin-bottom:
+                40px;
+
         }
 
-        .script-title {
-            margin: 0;
 
-            text-align: center;
+        .small-title {
+
+            font-size:
+                12px;
+
+            letter-spacing:
+                4px;
+
+            color:
+                var(--purple-dark);
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .title {
 
             font-family:
                 "Great Vibes",
                 cursive;
 
-            font-size: 52px;
+            font-size:
+                55px;
+
+            line-height:
+                1;
 
             color:
                 var(--pink-dark);
+
+            margin-bottom:
+                12px;
+
         }
 
-        h1 {
-            margin: 12px 0 10px;
 
-            text-align: center;
+        .subtitle {
 
             font-family:
                 "Cormorant Garamond",
                 serif;
 
             font-size:
-                clamp(42px, 7vw, 70px);
-
-            font-weight: 500;
-
-            color:
-                var(--purple-dark);
-        }
-
-        .description {
-            max-width: 650px;
-
-            margin:
-                0 auto 45px;
-
-            text-align: center;
-
-            font-size: 17px;
-
-            line-height: 1.7;
+                22px;
 
             color:
                 var(--text);
+
         }
 
-        .gallery-grid {
-            display: grid;
+
+        .top-actions {
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            gap:
+                10px;
+
+            margin-top:
+                22px;
+
+            flex-wrap:
+                wrap;
+
+        }
+
+
+        .action-button {
+
+            border:
+                none;
+
+            border-radius:
+                12px;
+
+            padding:
+                11px 18px;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size:
+                13px;
+
+            font-weight:
+                600;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.25s ease;
+
+        }
+
+
+        .upload-button {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--pink),
+                    var(--purple)
+                );
+
+            color:
+                white;
+
+            box-shadow:
+                0 6px 18px
+                rgba(
+                    168,
+                    93,
+                    120,
+                    0.16
+                );
+
+        }
+
+
+        .logout-button {
+
+            background:
+                var(--purple-light);
+
+            color:
+                var(--purple-dark);
+
+        }
+
+
+        .action-button:hover {
+
+            transform:
+                translateY(-1px);
+
+        }
+
+
+        .gallery {
+
+            display:
+                grid;
 
             grid-template-columns:
-                repeat(4, 1fr);
+                repeat(
+                    auto-fit,
+                    minmax(
+                        230px,
+                        1fr
+                    )
+                );
 
-            gap: 20px;
+            gap:
+                20px;
+
         }
 
+
         .gallery-item {
-            position: relative;
 
-            overflow: hidden;
+            position:
+                relative;
 
-            border-radius: 20px;
+            overflow:
+                hidden;
+
+            border-radius:
+                20px;
 
             background:
                 var(--purple-light);
 
             box-shadow:
                 0 8px 25px
-                rgba(118, 86, 111, 0.12);
+                rgba(
+                    118,
+                    86,
+                    111,
+                    0.12
+                );
+
+            min-height:
+                220px;
+
         }
+
 
         .gallery-item img {
-            display: block;
 
-            width: 100%;
+            display:
+                block;
 
-            aspect-ratio: 1 / 1;
+            width:
+                100%;
 
-            object-fit: cover;
+            height:
+                300px;
+
+            object-fit:
+                cover;
 
             transition:
-                transform 0.4s ease;
+                transform
+                0.4s ease;
+
         }
+
 
         .gallery-item:hover img {
+
             transform:
-                scale(1.04);
+                scale(1.03);
+
         }
 
+
         .photo-info {
-            position: absolute;
 
-            left: 10px;
+            position:
+                absolute;
 
-            bottom: 10px;
+            left:
+                10px;
 
-            display: flex;
+            bottom:
+                10px;
 
-            align-items: center;
-
-            gap: 7px;
-
-            padding: 4px 8px;
+            padding:
+                4px 9px;
 
             background:
                 rgba(
@@ -208,40 +364,62 @@
                     0.82
                 );
 
-            border-radius: 8px;
+            border-radius:
+                8px;
 
             backdrop-filter:
                 blur(5px);
+
         }
 
+
         .nickname {
-            margin: 0;
+
+            margin:
+                0;
 
             font-family:
                 "DM Sans",
                 sans-serif;
 
-            font-size: 12px;
+            font-size:
+                12px;
 
-            font-weight: 500;
+            font-weight:
+                500;
 
             color:
                 var(--text);
+
         }
 
+
         .delete-button {
-            border: none;
 
-            padding: 3px 6px;
+            position:
+                absolute;
 
-            border-radius: 6px;
+            top:
+                10px;
+
+            right:
+                10px;
+
+            border:
+                none;
+
+            border-radius:
+                8px;
+
+            padding:
+                7px 10px;
 
             background:
                 rgba(
-                    168,
-                    93,
-                    120,
-                    0.12
+                    255,
+                    253,
+                    251,
+                    0.88
                 );
 
             color:
@@ -251,132 +429,168 @@
                 "DM Sans",
                 sans-serif;
 
-            font-size: 10px;
+            font-size:
+                11px;
 
-            cursor: pointer;
+            font-weight:
+                600;
 
-            transition:
-                0.2s ease;
+            cursor:
+                pointer;
+
+            backdrop-filter:
+                blur(5px);
+
         }
+
 
         .delete-button:hover {
-            background:
-                var(--pink-dark);
 
-            color: white;
+            background:
+                white;
+
         }
 
-        .empty-message {
+
+        .empty-message,
+        .error {
+
             grid-column:
                 1 / -1;
 
-            text-align: center;
+            text-align:
+                center;
 
-            padding: 60px 20px;
+            padding:
+                60px 20px;
+
+            color:
+                var(--purple-dark);
 
             font-family:
                 "Cormorant Garamond",
                 serif;
 
-            font-size: 26px;
+            font-size:
+                22px;
 
-            color:
-                var(--purple-dark);
         }
+
 
         .loading {
+
             grid-column:
                 1 / -1;
 
-            text-align: center;
+            text-align:
+                center;
 
-            padding: 50px;
+            padding:
+                60px 20px;
 
             color:
                 var(--purple-dark);
-        }
 
-        .error {
-            grid-column:
-                1 / -1;
+            font-family:
+                "Cormorant Garamond",
+                serif;
 
-            text-align: center;
-
-            padding: 40px 20px;
-
-            color:
-                var(--pink-dark);
-        }
-
-
-        /* TABLET */
-
-        @media (max-width: 900px) {
-
-            .gallery-grid {
-                grid-template-columns:
-                    repeat(3, 1fr);
-            }
+            font-size:
+                22px;
 
         }
 
-
-        /* PHONE */
 
         @media (max-width: 600px) {
 
             body {
-                padding: 15px;
-            }
 
-            .gallery-card {
                 padding:
-                    40px 18px;
+                    30px 15px;
 
-                border-radius: 26px;
             }
 
-            .script-title {
-                font-size: 43px;
+
+            .title {
+
+                font-size:
+                    45px;
+
             }
 
-            h1 {
-                font-size: 48px;
+
+            .subtitle {
+
+                font-size:
+                    20px;
+
             }
 
-            .description {
-                font-size: 15px;
 
-                margin-bottom: 30px;
-            }
+            .gallery {
 
-            .gallery-grid {
                 grid-template-columns:
-                    repeat(2, 1fr);
+                    repeat(
+                        2,
+                        minmax(
+                            0,
+                            1fr
+                        )
+                    );
 
-                gap: 12px;
+                gap:
+                    12px;
+
             }
+
 
             .gallery-item {
-                border-radius: 15px;
+
+                border-radius:
+                    15px;
+
             }
+
+
+            .gallery-item img {
+
+                height:
+                    220px;
+
+            }
+
 
             .photo-info {
-                left: 7px;
 
-                bottom: 7px;
+                left:
+                    7px;
 
-                padding: 4px 6px;
+                bottom:
+                    7px;
+
+                padding:
+                    4px 7px;
+
             }
+
 
             .nickname {
-                font-size: 10px;
+
+                font-size:
+                    10px;
+
             }
 
-            .delete-button {
-                font-size: 9px;
+        }
 
-                padding: 3px 5px;
+
+        @media (max-width: 380px) {
+
+            .gallery {
+
+                grid-template-columns:
+                    1fr;
+
             }
 
         }
@@ -388,36 +602,57 @@
 
 <body>
 
-    <main class="gallery-page">
 
-        <section class="gallery-card">
+    <main class="page">
 
-            <p class="script-title">
-                Russien @18
+
+        <header class="header">
+
+            <p class="small-title">
+                RUSSIEN @18
             </p>
 
-            <h1>
-                Celebration Gallery
+            <h1 class="title">
+                Our Memories
             </h1>
 
-            <p class="description">
-                A collection of beautiful moments shared by
-                everyone who celebrated this special day.
+            <p class="subtitle">
+                A collection of moments from the celebration
             </p>
 
 
-            <div
-                id="gallery"
-                class="gallery-grid"
-            >
+            <div class="top-actions">
 
-                <div class="loading">
-                    Loading memories...
-                </div>
+                <button
+                    class="action-button upload-button"
+                    id="uploadButton"
+                >
+                    + Add Photos
+                </button>
+
+                <button
+                    class="action-button logout-button"
+                    id="logoutButton"
+                >
+                    Log Out
+                </button>
 
             </div>
 
+        </header>
+
+
+        <section
+            class="gallery"
+            id="gallery"
+        >
+
+            <div class="loading">
+                Loading memories...
+            </div>
+
         </section>
+
 
     </main>
 
@@ -427,14 +662,27 @@
         const SUPABASE_URL =
             "https://magaomtlctseieufgijk.supabase.co";
 
-
         const SUPABASE_KEY =
             "sb_publishable_nIm23K5lShcFGJ6m18DzaA_EAXQXGc0";
-
 
         const BUCKET_NAME =
             "photos";
 
+
+        const gallery =
+            document.getElementById("gallery");
+
+        const uploadButton =
+            document.getElementById("uploadButton");
+
+        const logoutButton =
+            document.getElementById("logoutButton");
+
+
+        const nickname =
+            sessionStorage.getItem(
+                "russienNickname"
+            );
 
         const accessToken =
             sessionStorage.getItem(
@@ -442,17 +690,13 @@
             );
 
 
-        const gallery =
-            document.getElementById(
-                "gallery"
-            );
-
-
         /*
-         * User must be logged in.
-         */
+        =========================================
+        CHECK LOGIN
+        =========================================
+        */
 
-        if (!accessToken) {
+        if (!nickname || !accessToken) {
 
             window.location.href =
                 "nickname.html";
@@ -460,9 +704,58 @@
         }
 
 
-        /* =========================================
-           GET CURRENT USER
-        ========================================= */
+        /*
+        =========================================
+        ADD PHOTOS
+        =========================================
+        */
+
+        uploadButton.addEventListener(
+            "click",
+            () => {
+
+                window.location.href =
+                    "upload.html";
+
+            }
+        );
+
+
+        /*
+        =========================================
+        LOG OUT
+        =========================================
+        */
+
+        logoutButton.addEventListener(
+            "click",
+            () => {
+
+                sessionStorage.removeItem(
+                    "russienNickname"
+                );
+
+                sessionStorage.removeItem(
+                    "russienAccessToken"
+                );
+
+                sessionStorage.removeItem(
+                    "russienRefreshToken"
+                );
+
+
+                window.location.href =
+                    "nickname.html";
+
+            }
+        );
+
+
+        /*
+        =========================================
+        LOAD CURRENT USER
+        =========================================
+        */
 
         async function getCurrentUser() {
 
@@ -486,7 +779,7 @@
             if (!response.ok) {
 
                 throw new Error(
-                    "Your session has expired."
+                    "Your login session has expired."
                 );
 
             }
@@ -497,9 +790,194 @@
         }
 
 
-        /* =========================================
-           LOAD GALLERY
-        ========================================= */
+        /*
+        =========================================
+        DELETE PHOTO
+        =========================================
+        */
+
+        async function deletePhoto(
+            photo,
+            item,
+            user
+        ) {
+
+            if (
+                photo.user_id !==
+                user.id
+            ) {
+
+                alert(
+                    "You can only delete your own photos."
+                );
+
+                return;
+
+            }
+
+
+            const confirmed =
+                confirm(
+                    "Delete this photo?"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            try {
+
+                /*
+                Get storage path from URL
+                */
+
+                const marker =
+                    `/object/public/${BUCKET_NAME}/`;
+
+
+                const markerIndex =
+                    photo.photo_url.indexOf(
+                        marker
+                    );
+
+
+                if (
+                    markerIndex === -1
+                ) {
+
+                    throw new Error(
+                        "Unable to find the photo file."
+                    );
+
+                }
+
+
+                const filePath =
+                    decodeURIComponent(
+                        photo.photo_url.substring(
+                            markerIndex +
+                            marker.length
+                        )
+                    );
+
+
+                /*
+                Delete file from Storage
+                */
+
+                const storageResponse =
+                    await fetch(
+                        `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}`,
+                        {
+                            method: "DELETE",
+
+                            headers: {
+                                "apikey":
+                                    SUPABASE_KEY,
+
+                                "Authorization":
+                                    `Bearer ${accessToken}`,
+
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                prefixes: [
+                                    filePath
+                                ]
+                            })
+                        }
+                    );
+
+
+                if (!storageResponse.ok) {
+
+                    const errorText =
+                        await storageResponse.text();
+
+                    throw new Error(
+                        errorText
+                    );
+
+                }
+
+
+                /*
+                Delete database record
+                */
+
+                const databaseResponse =
+                    await fetch(
+                        `${SUPABASE_URL}/rest/v1/photos?id=eq.${photo.id}`,
+                        {
+                            method: "DELETE",
+
+                            headers: {
+                                "apikey":
+                                    SUPABASE_KEY,
+
+                                "Authorization":
+                                    `Bearer ${accessToken}`
+                            }
+                        }
+                    );
+
+
+                if (!databaseResponse.ok) {
+
+                    const errorText =
+                        await databaseResponse.text();
+
+                    throw new Error(
+                        errorText
+                    );
+
+                }
+
+
+                item.remove();
+
+
+                if (
+                    gallery.children.length === 0
+                ) {
+
+                    gallery.innerHTML = `
+                        <div class="empty-message">
+                            No memories have been shared yet.
+                        </div>
+                    `;
+
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "DELETE ERROR:",
+                    error
+                );
+
+
+                alert(
+                    "Unable to delete photo: " +
+                    error.message
+                );
+
+            }
+
+        }
+
+
+        /*
+        =========================================
+        LOAD GALLERY
+        =========================================
+        */
 
         async function loadGallery() {
 
@@ -546,7 +1024,9 @@
                     "";
 
 
-                if (photos.length === 0) {
+                if (
+                    photos.length === 0
+                ) {
 
                     gallery.innerHTML = `
                         <div class="empty-message">
@@ -559,131 +1039,125 @@
                 }
 
 
-                photos.forEach(photo => {
+                photos.forEach(
+                    photo => {
 
-                    const item =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    item.className =
-                        "gallery-item";
-
-
-                    const image =
-                        document.createElement(
-                            "img"
-                        );
-
-
-                    image.src =
-                        photo.photo_url;
-
-
-                    image.alt =
-                        `Photo shared by ${photo.nickname}`;
-
-
-                    image.loading =
-                        "lazy";
-
-
-                    const photoInfo =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    photoInfo.className =
-                        "photo-info";
-
-
-                    const nicknameElement =
-                        document.createElement(
-                            "p"
-                        );
-
-
-                    nicknameElement.className =
-                        "nickname";
-
-
-                    nicknameElement.textContent =
-                        photo.nickname;
-
-
-                    photoInfo.appendChild(
-                        nicknameElement
-                    );
-
-
-                    /*
-                     * DELETE BUTTON
-                     *
-                     * Only show it when
-                     * this photo belongs
-                     * to the logged-in user.
-                     */
-
-                    if (
-                        photo.user_id ===
-                        user.id
-                    ) {
-
-                        const deleteButton =
+                        const item =
                             document.createElement(
-                                "button"
+                                "div"
                             );
 
 
-                        deleteButton.className =
-                            "delete-button";
+                        item.className =
+                            "gallery-item";
 
 
-                        deleteButton.textContent =
-                            "Delete";
+                        const image =
+                            document.createElement(
+                                "img"
+                            );
 
 
-                        deleteButton.type =
-                            "button";
+                        image.src =
+                            photo.photo_url;
+
+                        image.alt =
+                            `Photo shared by ${photo.nickname}`;
+
+                        image.loading =
+                            "lazy";
 
 
-                        deleteButton.addEventListener(
-                            "click",
-                            () => {
+                        item.appendChild(
+                            image
+                        );
 
-                                deletePhoto(
-                                    photo,
-                                    item
+
+                        /*
+                        Delete button only appears
+                        for the current user's photos.
+                        */
+
+                        if (
+                            photo.user_id ===
+                            user.id
+                        ) {
+
+                            const deleteButton =
+                                document.createElement(
+                                    "button"
                                 );
 
-                            }
-                        );
+
+                            deleteButton.className =
+                                "delete-button";
+
+
+                            deleteButton.textContent =
+                                "Delete";
+
+
+                            deleteButton.addEventListener(
+                                "click",
+                                () => {
+
+                                    deletePhoto(
+                                        photo,
+                                        item,
+                                        user
+                                    );
+
+                                }
+                            );
+
+
+                            item.appendChild(
+                                deleteButton
+                            );
+
+                        }
+
+
+                        const photoInfo =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        photoInfo.className =
+                            "photo-info";
+
+
+                        const name =
+                            document.createElement(
+                                "p"
+                            );
+
+
+                        name.className =
+                            "nickname";
+
+
+                        name.textContent =
+                            photo.nickname;
 
 
                         photoInfo.appendChild(
-                            deleteButton
+                            name
+                        );
+
+
+                        item.appendChild(
+                            photoInfo
+                        );
+
+
+                        gallery.appendChild(
+                            item
                         );
 
                     }
-
-
-                    item.appendChild(
-                        image
-                    );
-
-
-                    item.appendChild(
-                        photoInfo
-                    );
-
-
-                    gallery.appendChild(
-                        item
-                    );
-
-                });
+                );
 
 
             } catch (error) {
@@ -695,153 +1169,14 @@
 
 
                 gallery.innerHTML = `
-
                     <div class="error">
-
                         Unable to load the gallery.
-
+                        <br>
+                        <small>
+                            ${error.message}
+                        </small>
                     </div>
-
                 `;
-
-            }
-
-        }
-
-
-        /* =========================================
-           DELETE PHOTO
-        ========================================= */
-
-        async function deletePhoto(
-            photo,
-            galleryItem
-        ) {
-
-            const confirmed =
-                confirm(
-                    "Delete this photo?"
-                );
-
-
-            if (!confirmed) {
-
-                return;
-
-            }
-
-
-            try {
-
-                /*
-                 * Get the Storage path
-                 * from the public URL.
-                 */
-
-                const publicPrefix =
-                    `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/`;
-
-
-                const filePath =
-                    decodeURIComponent(
-                        photo.photo_url
-                            .replace(
-                                publicPrefix,
-                                ""
-                            )
-                    );
-
-
-                /*
-                 * Delete the actual
-                 * image from Storage.
-                 */
-
-                const storageResponse =
-                    await fetch(
-                        `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${filePath}`,
-                        {
-                            method: "DELETE",
-
-                            headers: {
-                                "apikey":
-                                    SUPABASE_KEY,
-
-                                "Authorization":
-                                    `Bearer ${accessToken}`
-                            }
-                        }
-                    );
-
-
-                if (!storageResponse.ok) {
-
-                    const error =
-                        await storageResponse.text();
-
-                    throw new Error(
-                        error
-                    );
-
-                }
-
-
-                /*
-                 * Delete the database record.
-                 *
-                 * RLS makes sure the user
-                 * can only delete their
-                 * own record.
-                 */
-
-                const databaseResponse =
-                    await fetch(
-                        `${SUPABASE_URL}/rest/v1/photos?id=eq.${photo.id}`,
-                        {
-                            method: "DELETE",
-
-                            headers: {
-                                "apikey":
-                                    SUPABASE_KEY,
-
-                                "Authorization":
-                                    `Bearer ${accessToken}`
-                            }
-                        }
-                    );
-
-
-                if (!databaseResponse.ok) {
-
-                    const error =
-                        await databaseResponse.text();
-
-                    throw new Error(
-                        error
-                    );
-
-                }
-
-
-                /*
-                 * Remove the photo
-                 * immediately from the page.
-                 */
-
-                galleryItem.remove();
-
-
-            } catch (error) {
-
-                console.error(
-                    "DELETE ERROR:",
-                    error
-                );
-
-
-                alert(
-                    "Unable to delete this photo. Please try again."
-                );
 
             }
 
