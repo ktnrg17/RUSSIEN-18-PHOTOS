@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -16,7 +17,6 @@
 
     <title>Russien @18 | Photo Upload</title>
 
-    <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -26,6 +26,7 @@
     >
 
     <link rel="stylesheet" href="upload.css">
+
 </head>
 
 <body>
@@ -47,35 +48,6 @@
             </p>
 
 
-            <!-- =========================
-                 NICKNAME
-            ========================== -->
-
-            <div class="nickname-section">
-
-                <label for="nickname">
-                    Your Nickname
-                </label>
-
-                <input
-                    type="text"
-                    id="nickname"
-                    placeholder="Enter your nickname"
-                    maxlength="30"
-                    autocomplete="off"
-                >
-
-                <p class="nickname-note">
-                    Please enter your nickname before uploading.
-                </p>
-
-            </div>
-
-
-            <!-- =========================
-                 UPLOAD BOX
-            ========================== -->
-
             <div class="upload-box">
 
                 <div class="upload-icon">
@@ -90,6 +62,7 @@
                     Select up to 20 photos from the celebration.
                 </p>
 
+
                 <input
                     type="file"
                     id="photoInput"
@@ -98,12 +71,14 @@
                     hidden
                 >
 
+
                 <label
                     for="photoInput"
                     class="upload-button"
                 >
                     Choose Photos
                 </label>
+
 
                 <p
                     id="fileCount"
@@ -115,19 +90,11 @@
             </div>
 
 
-            <!-- =========================
-                 PREVIEWS
-            ========================== -->
-
             <div
                 id="previewContainer"
                 class="preview-container"
             ></div>
 
-
-            <!-- =========================
-                 UPLOAD BUTTON
-            ========================== -->
 
             <button
                 id="uploadButton"
@@ -138,10 +105,6 @@
                 Upload Photos
             </button>
 
-
-            <!-- =========================
-                 PROGRESS
-            ========================== -->
 
             <div
                 id="progressContainer"
@@ -165,10 +128,6 @@
             </div>
 
 
-            <!-- =========================
-                 MESSAGE
-            ========================== -->
-
             <div
                 id="message"
                 class="message"
@@ -182,6 +141,7 @@
         </section>
 
     </main>
+
 
     <script src="upload.js"></script>
 
