@@ -8,7 +8,7 @@ const BUCKET_NAME =
     "photos";
 
 const MAX_PHOTOS =
-    20;
+    100;
 
 
 const photoInput =
