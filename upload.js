@@ -2,7 +2,7 @@ const SUPABASE_URL =
     "https://magaomtlctseieufgijk.supabase.co";
 
 const SUPABASE_KEY =
-    "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE";
+    sb_publishable_nIm23K5lShcFGJ6m18DzaA_EAXQXGc0;
 
 const BUCKET_NAME =
     "photos";
